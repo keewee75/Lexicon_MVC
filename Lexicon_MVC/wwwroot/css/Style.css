@@ -22,6 +22,12 @@ main > .container {
     user-select: none;
 }
 
+.container > .d-flex > .form2a {
+    width: 200px;
+    border-radius: 6px;
+    border: 1px solid grey;
+}
+
 @media (min-width: 768px) {
     .bd-placeholder-img-lg {
         font-size: 3.5rem;

@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewBag.Title</title>
     
-	<!-- Bootstrap core CSS -->
-    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="~/css/Style.css" />
+	<!-- Bootstrap core CSS and Custom styles-->
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/Style.css" rel="stylesheet" />
     
-    <!-- Custom styles for this template -->
-    @*<link href="~/lib/bootstrap/css/sticky-footer-navbar.css" rel="stylesheet">*@
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -26,22 +24,25 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
           <li class="nav-item">
-            <a class="nav-link" asp-action="Index">Home</a>
+            <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" asp-action="AboutMe">About Me</a>
+            <a class="nav-link" asp-controller="Home" asp-action="AboutMe">About Me</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" asp-action="Projects">Projects</a>
+            <a class="nav-link" asp-controller="Home" asp-action="Projects">Projects</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" asp-action="Contact">Contact</a>
+            <a class="nav-link" asp-controller="Home" asp-action="Contact">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" asp-controller="Doctor" asp-action="Index">Fever Check</a>
           </li>
         </ul>
-        <form class="d-flex">
+@*        <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        </form>*@
       </div>
     </div>
   </nav>
@@ -54,19 +55,13 @@
   </div>
 </main>
 
-@*<div>
-    @RenderBody()
-</div>*@
-
 <footer class="footer mt-auto py-3 bg-light">
   <div class="container">
     <span class="text-muted">&copy; Marko Kivi @DateTime.Now.ToString("yyyy-MM-dd")</span>
   </div>
 </footer>
 
-
-    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-      
-  </body>
+ <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+     
+ </body>
 </html>
