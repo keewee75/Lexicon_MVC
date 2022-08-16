@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewData["Title"] = "AboutMe";
+}
+
+@{
+    var myName = " Marko Kivi";
+
+    DateTime dateTimeToday = DateTime.UtcNow;
+    DateTime birthDate = new DateTime(1975, 1, 6);
+    TimeSpan difference = dateTimeToday.Subtract(birthDate);
+    var firstDay = new DateTime(1, 1, 1);
+    int totalYears = (firstDay + difference).Year - 1;
+}
+<h1>About Me</h1>
+<p><b>Name: </b>@myName</p>
+<p><b>Age: </b>@totalYears</p>
+
+
+

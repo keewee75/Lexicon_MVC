@@ -3,5 +3,11 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+@{
+    var welcomeMessage = "Welcome to my website";
+    var weekDay = DateTime.Now.DayOfWeek;
+}
+<h1>@welcomeMessage</h1>
+<p>Today is @weekDay</p>
+
 
