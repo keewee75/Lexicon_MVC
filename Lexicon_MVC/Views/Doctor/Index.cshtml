@@ -3,19 +3,19 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Your temperature: @ViewBag.Temperature</h1>
+<h1>
+    @if (ViewBag.Temperature != null)
+    {
+        @ViewBag.Temperature
+    }
+    else
+    {
+        @ViewBag.Message
+    }
+    
+</h1>
 
-<form class="d-flex" method="post">
-          
+<form class="d-flex" method="post">    
     <button asp-controller="Doctor" asp-action="Index" class="btn btn-outline-success" type="submit">CheckTemp</button>      
-    <input class="form2a" name="Temp" type="number" placeholder="Insert temperature..." aria-label="temperature" asp-controller="Doctor" asp-action="Index">
-    @*<input class="form-control me-2" name="Temp" type="number" placeholder="Insert temperature..." aria-label="temperature" asp-controller="Doctor" asp-action="Index">*@   
+    <input class="form2a" name="Temp" type="number" placeholder="Insert temperature..." aria-label="temperature" asp-controller="Doctor" asp-action="Index">   
 </form>
-
-
-@*<form class="d-flex" asp-controller="Doctor" asp-action="Index">
-          
-          <input class="form-control me-2" type="number" placeholder="temperature" aria-label="temperature" name="Temp">
-          <button class="btn btn-outline-success" type="submit">CheckTemp</button>
-          
-</form>*@

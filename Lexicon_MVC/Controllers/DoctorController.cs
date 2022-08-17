@@ -1,33 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Lexicon_MVC.Models;
 
 namespace Lexicon_MVC.Controllers
 {
     public class DoctorController : Controller
     {
+        static string message = "Insert temperature below:";
 
         public IActionResult Index()
         {
-            //ViewBag.Temperature = 0;
+            ViewBag.Message = message;
             return View();
         }
 
         [HttpPost]
-        public IActionResult Index(int Temp)
+        public IActionResult Index(int? temp)
         {
-            var cold = "°C, You are ice cold !";
-            var fever = "°C, You got a fever !";
-            var okay = "°C, You are OK !";
-            if (Temp < 37)
+            if (temp != null)
             {
-                ViewBag.Temperature = Temp + cold;              
-            }
-            else if (Temp > 37)
-            {
-                ViewBag.Temperature = Temp + fever;   
+                ViewBag.Temperature = Utilities.FeverCheck(temp);
             }
             else
             {
-                ViewBag.Temperature = Temp + okay;               
+                ViewBag.Message = message;
             }
             return View();
         }
