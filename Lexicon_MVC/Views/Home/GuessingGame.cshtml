@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewData["Title"] = "Guessing Game";
+}
+
+<h1>Guessing Game</h1>
+
+
+<form class="d-flex" method="post">    
+    <button asp-controller="Home" asp-action="GuessingGame" class="btn btn-outline-success" type="submit">Submit number</button>
+    <input class="form2a" name="input" type="number" placeholder="Insert number..." aria-label="guess" asp-controller="Home" asp-action="GuessingGame">   
+</form>
+
+@if (ViewBag.Message != null)
+{
+    <p>@ViewBag.Message</p>
+}
+
+@if (ViewBag.NumberToGuess != null)
+{
+    <p>@ViewBag.NumberToGuess</p>
+}
+
+@if (ViewBag.Count != null)
+{
+    <p>Number of guesses: @ViewBag.Count</p>
+}

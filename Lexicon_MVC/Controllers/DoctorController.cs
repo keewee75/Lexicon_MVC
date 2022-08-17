@@ -5,7 +5,7 @@ namespace Lexicon_MVC.Controllers
 {
     public class DoctorController : Controller
     {
-        static string message = "Insert temperature below:";
+        static string message = "Check your temperature :";
 
         public IActionResult Index()
         {
