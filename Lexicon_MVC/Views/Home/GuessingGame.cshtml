@@ -3,22 +3,37 @@
     ViewData["Title"] = "Guessing Game";
 }
 
-<h1>Guessing Game</h1>
+<h1>Guess the number</h1>
 
-
-<form class="d-flex" method="post">    
-    <button asp-controller="Home" asp-action="GuessingGame" class="btn btn-outline-success" type="submit">Submit number</button>
-    <input class="form2a" name="input" type="number" placeholder="Insert number..." aria-label="guess" asp-controller="Home" asp-action="GuessingGame">   
-</form>
-
-@if (ViewBag.Message != null)
+@if (ViewBag.EndMessage == "End")
 {
+    @if (ViewBag.Message != null)
+    {
     <p>@ViewBag.Message</p>
+    }
+    <button class="btn btn-primary" onClick="window.location.href=window.location.href">Reload Game</button>
 }
+else
+{
+    <form method="post">
+       <div class="input-group mb-3 w-25">
+           <div class="col-sm-4">
+               <input type="number" name="input" class="form-control" min="1" max="100" placeholder="Insert..." aria-label="Number" aria-describedby="basic-addon1" asp-controller="Home" asp-action="GuessingGame">
+           </div>
+           <button asp-controller="Home" asp-action="GuessingGame" class="btn btn-success" type="submit">Submit</button>
+       </div>
+    </form>
+
+    @if (ViewBag.Message != null)
+    {
+        <p>@ViewBag.Message</p>
+    }
+}
+
 
 @if (ViewBag.NumberToGuess != null)
 {
-    <p>@ViewBag.NumberToGuess</p>
+    <p>(The random number is: @ViewBag.NumberToGuess)</p>
 }
 
 @if (ViewBag.Count != null)

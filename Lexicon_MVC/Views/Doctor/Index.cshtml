@@ -15,7 +15,12 @@
     
 </h1>
 
-<form class="d-flex" method="post">    
-    <button asp-controller="Doctor" asp-action="Index" class="btn btn-outline-success" type="submit">Submit Temp</button>      
-    <input class="form2a" name="Temp" type="number" placeholder="Insert temperature..." aria-label="temperature" asp-controller="Doctor" asp-action="Index">   
+
+<form method="post">
+    <div class="input-group mb-3 w-25">
+        <div class="col-sm-4">
+            <input type="number" name="Temp" class="form-control" min="1" max="100" placeholder="Insert..." aria-label="temperature" aria-describedby="basic-addon1" asp-controller="Doctor" asp-action="Index">
+        </div>
+        <button asp-controller="Doctor" asp-action="Index" class="btn btn-success" type="submit">Submit</button>
+    </div>
 </form>
