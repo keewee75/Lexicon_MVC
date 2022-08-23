@@ -6,8 +6,8 @@
     <title>@ViewBag.Title</title>
     
 	<!-- Bootstrap core CSS and Custom styles-->
-    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/css/Style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/Style.css" />
     
 </head>
 
@@ -40,6 +40,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" asp-controller="Doctor" asp-action="Index">Fever Check</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" asp-controller="People" asp-action="Index">People</a>
           </li>
         </ul>
         @*<form class="d-flex">
