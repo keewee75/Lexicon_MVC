@@ -1,0 +1,17 @@
+﻿@model PersonViewModel
+
+<tr>
+    <td>@Model.Name</td>
+    <td>@Model.City</td>
+    <td>@Model.PhoneNumber</td>
+    <td>
+<form method="post">
+ <button
+    class="btn"
+    asp-action="Delete"
+    asp-controller="People"
+    asp-route-id="@Model.PersonId"
+>Delete</button>
+</form>
+    </td>
+    </tr>

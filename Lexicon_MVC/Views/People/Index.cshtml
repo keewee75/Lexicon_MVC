@@ -54,6 +54,7 @@
 
 
 
+
 <table class=" table table-striped">
 
     <th>Name</th>
@@ -63,21 +64,7 @@
 
 @foreach (var person in Model.People)
 {
-    <tr>
-    <td>@person.Name</td>
-    <td>@person.City</td>
-    <td>@person.PhoneNumber</td>
-    <td>
-<form method="post">
- <button
-    class="btn"
-    asp-action="Delete"
-    asp-controller="People"
-    asp-route-id="@person.PersonId"   
->Delete</button>
-</form>
-    </td>
-    </tr>
+    <partial name="_Person" model="person" />
 }
 </table>
 <div>
