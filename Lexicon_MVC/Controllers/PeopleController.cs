@@ -25,7 +25,6 @@ namespace Lexicon_MVC.Controllers
                 return View("Index", peopleViewModel);
             }
 
-            //var filteredPeople = peopleViewModel.People.FindAll(p => p.Name == searchString);
             var filteredPeople = peopleViewModel.People
                 .Where(x => x.Name == searchString || x.City == searchString).ToList();
             var m = new PeopleViewModel();
