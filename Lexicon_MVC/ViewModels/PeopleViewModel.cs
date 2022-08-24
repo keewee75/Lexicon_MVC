@@ -15,7 +15,7 @@ namespace Lexicon_MVC.ViewModels
             {
                 PersonId = 1,
                 Name = "Kalle",
-                City = "Stockhom",
+                City = "Stockholm",
                 PhoneNumber = "+46 080808"
             });
 
@@ -30,6 +30,14 @@ namespace Lexicon_MVC.ViewModels
             People.Add(new Person()
             {
                 PersonId = 3,
+                Name = "Emil",
+                City = "Gothenburg",
+                PhoneNumber = "+46 031032"
+            });
+
+            People.Add(new Person()
+            {
+                PersonId = 4,
                 Name = "Olle",
                 City = "Malmö",
                 PhoneNumber = "+46 040040"

@@ -7,7 +7,7 @@ namespace Lexicon_MVC.Controllers
 {
     public class PeopleController : Controller
     {
-        
+
         public static PeopleViewModel peopleViewModel = new PeopleViewModel();
         private static int idCounter = peopleViewModel.People.Count;
         public IActionResult Index()
@@ -17,14 +17,34 @@ namespace Lexicon_MVC.Controllers
 
         }
 
+        public IActionResult Search(string searchString)
+        {
+            if (String.IsNullOrEmpty(searchString))
+            {
+                ViewBag.Message = "";
+                return View("Index", peopleViewModel);
+            }
+
+            //var filteredPeople = peopleViewModel.People.FindAll(p => p.Name == searchString);
+            var filteredPeople = peopleViewModel.People
+                .Where(x => x.Name == searchString || x.City == searchString).ToList();
+            var m = new PeopleViewModel();
+            m.People = filteredPeople;
+            if (filteredPeople.Count == 0)
+            {
+                ViewBag.Message = "No data was found for your search criteria";
+            }
+            return View("Index", m);
+        }
+
         [HttpPost]
         public IActionResult Delete(int id)
         {
-          
+
             //ta bort personen med rätt id
             peopleViewModel.People.RemoveAll(x => x.PersonId == id);
 
-            return View("Index",peopleViewModel);
+            return View("Index", peopleViewModel);
 
         }
 
@@ -40,13 +60,13 @@ namespace Lexicon_MVC.Controllers
                     City = p.cpvm.City,
                     PhoneNumber = p.cpvm.PhoneNumber
                 });
-                idCounter++;    
+                idCounter++;
             }
             else
             {
                 var i = ModelState.ErrorCount;
             }
-            
+
 
             return View("Index", peopleViewModel);
         }
