@@ -6,53 +6,17 @@
 
 <h1>People</h1>
 
-@*<form method="post">
+<form asp-controller="People" asp-action="Search">
     <div class="input-group mb-3 w-50">
         <div class="col-sm-4">
-            <input type="text" name="Search" class="form-control" placeholder="Search..." aria-label="search" aria-describedby="basic-addon1" asp-controller="People" asp-action="Search">
+            <input type="text" name="searchString" class="form-control" placeholder="Search..." aria-label="search" aria-describedby="basic-addon1">
         </div>
-        <button asp-controller="People" asp-action="Search" class="btn btn-success" type="submit">Search</button>
+        <button asp-controller="People" asp-action="Search" class="btn btn-success" type="submit">Filter</button>
     </div>
-</form>*@
-
-<form asp-controller="People" asp-action="Search">
-    <p>
-        <input type="text" name="searchString" />
-        <input type="submit" value="Filter" />
-    </p>
 </form>
 
 
-<form asp-controller="People" asp-action="AddPerson" method="post">
-  <div class="form-group row">
-    <label asp-for="cpvm.Name" class="col-sm-1 col-form-label">Name</label>
-    <div class="col-sm-5">
-      <input asp-for="cpvm.Name" type="text" class="form-control" placeholder="Name">
-      <span asp-validation-for="cpvm.Name"></span>
-    </div>
-  </div>
-  <div class="form-group row">
-    <label asp-for="cpvm.City" class="col-sm-1 col-form-label">City</label>
-    <div class="col-sm-5">
-      <input type="text" class="form-control" asp-for="cpvm.City" placeholder="City">
-      <span asp-validation-for="cpvm.City"></span>
-    </div>
-  </div>
-  <div class="form-group row">
-    <label asp-for="cpvm.PhoneNumber" class="col-sm-1 col-form-label"></label>
-    <div class="col-sm-5">
-      <input type="text" class="form-control" asp-for="cpvm.PhoneNumber" placeholder="Phone number">
-      <span asp-validation-for="cpvm.PhoneNumber"></span>
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-sm-10">
-      <button type="submit" class="btn btn-primary">Add Person</button>
-    </div>
-  </div>
-</form>
-
-
+<partial name="_AddPerson" model="Model" />
 
 
 <table class=" table table-striped">

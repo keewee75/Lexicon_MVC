@@ -5,7 +5,6 @@ namespace Lexicon_MVC.ViewModels
     public class CreatePersonViewModel
     {
 
-        public string? PersonId { get; set; }
         [Required]
         public string? Name { get; set; }
         [Required]
@@ -14,7 +13,6 @@ namespace Lexicon_MVC.ViewModels
         [Required]
         [StringLength (10)]
         public string? PhoneNumber { get; set; }
-
 
     }
 }
