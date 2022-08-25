@@ -15,7 +15,7 @@
     </div>
 </form>
 
-
+<!-- Partial View _AddPerson -->
 <partial name="_AddPerson" model="Model" />
 
 
@@ -28,6 +28,7 @@
 
 @foreach (var person in Model.People)
 {
+    <!-- Partial View _Person -->
     <partial name="_Person" model="person" />
 }
 </table>
