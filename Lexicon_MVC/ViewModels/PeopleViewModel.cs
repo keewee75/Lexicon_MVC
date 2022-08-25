@@ -4,14 +4,14 @@ namespace Lexicon_MVC.ViewModels
 {
     public class PeopleViewModel
     {
-        public List<PersonViewModel> People { get; set; }
+        public List<Person> People { get; set; }
 
         public CreatePersonViewModel cpvm { get; set; }
 
     public PeopleViewModel()
         {
-            People = new List<PersonViewModel>();
-            People.Add(new PersonViewModel()
+            People = new List<Person>();
+            People.Add(new Person()
             {
                 PersonId = 1,
                 Name = "Kalle",
@@ -19,7 +19,7 @@ namespace Lexicon_MVC.ViewModels
                 PhoneNumber = "+46 080808"
             });
 
-            People.Add(new PersonViewModel()
+            People.Add(new Person()
             {
                 PersonId = 2,
                 Name = "Marko",
@@ -27,7 +27,7 @@ namespace Lexicon_MVC.ViewModels
                 PhoneNumber = "+46 031031"
             });
 
-            People.Add(new PersonViewModel()
+            People.Add(new Person()
             {
                 PersonId = 3,
                 Name = "Emil",
@@ -35,7 +35,7 @@ namespace Lexicon_MVC.ViewModels
                 PhoneNumber = "+46 031032"
             });
 
-            People.Add(new PersonViewModel()
+            People.Add(new Person()
             {
                 PersonId = 4,
                 Name = "Olle",

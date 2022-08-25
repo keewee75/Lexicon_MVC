@@ -52,7 +52,7 @@ namespace Lexicon_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                peopleViewModel.People.Add(new PersonViewModel()
+                peopleViewModel.People.Add(new Person()
                 {
                     PersonId = idCounter + 1,
                     Name = p.cpvm.Name,
