@@ -8,7 +8,7 @@ namespace Lexicon_MVC.ViewModels
 
         public CreatePersonViewModel cpvm { get; set; }
         public bool deleteSuccess { get; set; } = false;
-        public string personDeleted { get; set; }
+        public string personDeleted { get; set; } = "";
 
     public PeopleViewModel()
         {

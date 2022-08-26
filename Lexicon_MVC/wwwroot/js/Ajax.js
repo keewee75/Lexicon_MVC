@@ -1,12 +1,34 @@
-﻿$(document).ready(function () {
+﻿//$(document).ready(function () {
 
-    $("#button1").click(function () {
-        $("#div1").load("/Ajax/ListPeople");
-    });
+//    $("#button1").click(function () {
+//        $("#div1").load("/Ajax/ListPeople");
+//    });
 
-});
+//});
 
 $(document).ready(function () {
+
+    $("#button1").click(function () {
+        
+        $.ajax({
+            type: "GET",
+            url: "/Ajax/ListPeople",
+            dataType: "html",
+            success: function (response) {
+
+                $("#div1").html(response);
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+        $("#personId").val("");
+    });
+
+
     $("#button2").click(function () {
         var value = $("#personId").val();
         $.ajax({
@@ -30,7 +52,7 @@ $(document).ready(function () {
 
     $("#button3").click(function () {
         var value = $("#personId").val();
-       
+        
         $.ajax({
             type: "POST",
             url: "/Ajax/PersonDelete",
@@ -39,7 +61,6 @@ $(document).ready(function () {
             success: function (response) {
                
                 $("#div1").html(response);
-               
             },
             failure: function (response) {
                 alert(response.responseText);
