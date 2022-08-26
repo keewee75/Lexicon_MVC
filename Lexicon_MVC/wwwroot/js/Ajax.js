@@ -25,18 +25,21 @@ $(document).ready(function () {
                 alert(response.responseText);
             }
         });
+        $("#personId").val("");
     });
 
     $("#button3").click(function () {
         var value = $("#personId").val();
+       
         $.ajax({
             type: "POST",
             url: "/Ajax/PersonDelete",
             dataType: "html",
             data: { id: value },
             success: function (response) {
-
+               
                 $("#div1").html(response);
+               
             },
             failure: function (response) {
                 alert(response.responseText);
@@ -45,6 +48,6 @@ $(document).ready(function () {
                 alert(response.responseText);
             }
         });
+        $("#personId").val("");
     });
-
 });

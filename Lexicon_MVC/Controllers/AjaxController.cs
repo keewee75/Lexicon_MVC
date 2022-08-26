@@ -39,6 +39,8 @@ namespace Lexicon_MVC.Controllers
 
             //ta bort personen med rätt id
             peopleViewModel.People.RemoveAll(x => x.PersonId == id);
+
+            // Check if person was deleted
             if (count != peopleViewModel.People.Count)
             {
                 peopleViewModel.deleteSuccess = true;
