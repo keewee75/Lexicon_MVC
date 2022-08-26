@@ -45,7 +45,7 @@ namespace Lexicon_MVC.Controllers
             {
                 peopleViewModel.deleteSuccess = true;
                 peopleViewModel.personDeleted = personIdList.People[0].Name;
-                ViewBag.Message = personIdList.People[0].Name + " Was deleted";
+                ViewBag.Message = personIdList.People[0].Name + " was deleted";
             }
             else
             {
