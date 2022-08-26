@@ -18,20 +18,9 @@
 <!-- Partial View _AddPerson -->
 <partial name="_AddPerson" model="Model" />
 
+<!-- Partial View _Person -->
+<partial name="_Person" model="Model" />
 
-<table class=" table table-striped">
-
-    <th>Name</th>
-    <th>City</th>
-    <th>Phone Number</th>
-    <th>Delete</th>
-
-@foreach (var person in Model.People)
-{
-    <!-- Partial View _Person -->
-    <partial name="_Person" model="person" />
-}
-</table>
 <div>
     <span>@ViewBag.Message</span>
 </div>

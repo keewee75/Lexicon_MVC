@@ -1,12 +1,14 @@
 ﻿@model PeopleViewModel
 
+<p></p>
+<p>Partial View with Ajax/jQuery</p>
 
 <table class=" table table-striped">
 
     <th>Name</th>
     <th>City</th>
     <th>Phone Number</th>
-    <th>Delete</th>
+    <th>Id</th>
 
 @foreach (var person in Model.People)
 {
@@ -14,16 +16,15 @@
     <td>@person.Name</td>
     <td>@person.City</td>
     <td>@person.PhoneNumber</td>
-    <td>
-<form method="post">
- <button
-    class="btn"
-    asp-action="Delete"
-    asp-controller="People"
-    asp-route-id="@person.PersonId"
->Delete</button>
-</form>
-    </td>
-    </tr>
+    <td>@person.PersonId</td>
+</tr>
 }
 </table>
+
+
+@{
+    if (Model.deleteSuccess)
+    {
+        <p>@Model.personDeleted was deleted</p>
+    }
+}
