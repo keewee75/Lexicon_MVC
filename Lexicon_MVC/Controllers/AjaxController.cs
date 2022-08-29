@@ -2,12 +2,14 @@
 using Lexicon_MVC.ViewModels;
 using Lexicon_MVC.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using Lexicon_MVC.Data;
 
 namespace Lexicon_MVC.Controllers
 {
     public class AjaxController : Controller
     {
         public static PeopleViewModel peopleViewModel = new PeopleViewModel();
+
         public ActionResult Index()
         {
             return View();

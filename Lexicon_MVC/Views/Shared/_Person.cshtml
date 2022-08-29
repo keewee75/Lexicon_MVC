@@ -1,29 +1,18 @@
-﻿@model PeopleViewModel
+﻿@model Person
 
-
-<table class=" table table-striped">
-
-    <th>Name</th>
-    <th>City</th>
-    <th>Phone Number</th>
-    <th>Delete</th>
-
-@foreach (var person in Model.People)
-{
 <tr>
-    <td>@person.Name</td>
-    <td>@person.City</td>
-    <td>@person.PhoneNumber</td>
+    <td>@Model.PersonId</td>
+    <td>@Model.Name</td>
+    <td>@Model.City</td>
+    <td>@Model.PhoneNumber</td>
     <td>
 <form method="post">
  <button
     class="btn"
     asp-action="Delete"
     asp-controller="People"
-    asp-route-id="@person.PersonId"
+    asp-route-id="@Model.PersonId"
 >Delete</button>
 </form>
-    </td>
-    </tr>
-}
-</table>
+</td>
+</tr>

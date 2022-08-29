@@ -1,4 +1,5 @@
-﻿using Lexicon_MVC.Models;
+﻿using Lexicon_MVC.Data;
+using Lexicon_MVC.Models;
 using Lexicon_MVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
@@ -10,11 +11,18 @@ namespace Lexicon_MVC.Controllers
 
         public static PeopleViewModel peopleViewModel = new PeopleViewModel();
         private static int idCounter = peopleViewModel.People.Count;
+        readonly ApplicationDbContext? _dbContext; // creates a readonly of DbContext
+
+        public PeopleController(ApplicationDbContext? dbContext) // Adds a context to a constructor
+        {
+            _dbContext = dbContext; // Initiates the value
+        }
+
         public IActionResult Index()
         {
-
+            peopleViewModel.People = _dbContext.People.ToList();
+            
             return View(peopleViewModel);
-
         }
 
         public IActionResult Search(string searchString)
@@ -26,6 +34,7 @@ namespace Lexicon_MVC.Controllers
             }
 
             var filteredPeople = peopleViewModel.People
+                //.Where(x => x.Name == searchString || x.City == searchString).ToList();
                 .Where(x => x.Name == searchString || x.City == searchString).ToList();
             var m = new PeopleViewModel();
             m.People = filteredPeople;
