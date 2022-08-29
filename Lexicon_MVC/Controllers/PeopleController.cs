@@ -33,9 +33,11 @@ namespace Lexicon_MVC.Controllers
                 return View("Index", peopleViewModel);
             }
 
+            StringComparison comp = StringComparison.OrdinalIgnoreCase;
             var filteredPeople = peopleViewModel.People
                 //.Where(x => x.Name == searchString || x.City == searchString).ToList();
-                .Where(x => x.Name == searchString || x.City == searchString).ToList();
+                
+                .Where(x => x.Name.Contains(searchString, comp) || x.City.Contains(searchString, comp)).ToList();
             var m = new PeopleViewModel();
             m.People = filteredPeople;
             if (filteredPeople.Count == 0)
