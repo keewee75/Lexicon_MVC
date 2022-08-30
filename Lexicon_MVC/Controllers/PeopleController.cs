@@ -35,8 +35,6 @@ namespace Lexicon_MVC.Controllers
 
             StringComparison comp = StringComparison.OrdinalIgnoreCase;
             var filteredPeople = peopleViewModel.People
-                //.Where(x => x.Name == searchString || x.City == searchString).ToList();
-                
                 .Where(x => x.Name.Contains(searchString, comp) || x.City.Contains(searchString, comp)).ToList();
             var m = new PeopleViewModel();
             m.People = filteredPeople;
@@ -52,7 +50,15 @@ namespace Lexicon_MVC.Controllers
         {
 
             //ta bort personen med rätt id
-            peopleViewModel.People.RemoveAll(x => x.PersonId == id);
+            //peopleViewModel.People.RemoveAll(x => x.PersonId == id);
+            using (_dbContext)
+            {
+               var removePerson = new Person() { PersonId = id };
+                _dbContext.People.Remove(removePerson);
+                _dbContext.SaveChanges();
+                peopleViewModel.People = _dbContext.People.ToList();
+            }
+            
 
             return View("Index", peopleViewModel);
 
@@ -61,38 +67,27 @@ namespace Lexicon_MVC.Controllers
         [HttpPost]
         public IActionResult AddPerson(PeopleViewModel p)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    peopleViewModel.People.Add(new Person()
-            //    {
-            //        PersonId = idCounter + 1,
-            //        Name = p.cpvm.Name,
-            //        City = p.cpvm.City,
-            //        PhoneNumber = p.cpvm.PhoneNumber
-            //    });
-            //    idCounter++;
-            //}
-            //else
-            //{
-            //    var i = ModelState.ErrorCount;
-            //}
 
-
-            using (_dbContext)
+            if (ModelState.IsValid)
             {
-                var newPerson = new Person()
+                using (_dbContext)
                 {
-                    Name = p.cpvm.Name,
-                    City = p.cpvm.City,
-                    PhoneNumber = p.cpvm.PhoneNumber,
-                };
-                _dbContext.People.Add(newPerson);
-                _dbContext.SaveChanges();
-                peopleViewModel.People = _dbContext.People.ToList();
+                    var newPerson = new Person()
+                    {
+                        Name = p.cpvm.Name,
+                        City = p.cpvm.City,
+                        PhoneNumber = p.cpvm.PhoneNumber,
+                    };
+                    _dbContext.People.Add(newPerson);
+                    _dbContext.SaveChanges();
+                    peopleViewModel.People = _dbContext.People.ToList();
+                }
             }
-
+            else
+            {
+                var i = ModelState.ErrorCount;
+            }
             
-
             return View("Index", peopleViewModel);
         }
 
