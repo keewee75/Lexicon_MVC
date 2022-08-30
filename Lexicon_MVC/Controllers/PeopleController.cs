@@ -52,12 +52,10 @@ namespace Lexicon_MVC.Controllers
 
             //ta bort personen med rätt id
 
-
             var removePerson = new Person() { PersonId = id };
             _dbContext.People.Remove(removePerson);
             _dbContext.SaveChanges();
             peopleViewModel.People = _dbContext.People.ToList();
-
 
             return View("Index", peopleViewModel);
         }
