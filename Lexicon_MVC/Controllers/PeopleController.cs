@@ -2,6 +2,8 @@
 using Lexicon_MVC.Models;
 using Lexicon_MVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace Lexicon_MVC.Controllers
@@ -19,7 +21,9 @@ namespace Lexicon_MVC.Controllers
 
         public IActionResult Index()
         {
-            peopleViewModel.People = _dbContext.People.ToList();
+            ViewBag.CityNames = new SelectList(_dbContext.Cities, "CityId", "CityName");
+            //peopleViewModel.People = _dbContext.People.ToList();
+            peopleViewModel.People = _dbContext.People.Include(c => c.City).ToList();
 
             return View(peopleViewModel);
         }
@@ -34,7 +38,7 @@ namespace Lexicon_MVC.Controllers
 
             StringComparison comp = StringComparison.OrdinalIgnoreCase;
             var filteredPeople = peopleViewModel.People
-                .Where(x => x.Name.Contains(searchString, comp) || x.City.Contains(searchString, comp)).ToList();
+                .Where(x => x.Name.Contains(searchString, comp) || x.City.CityName.Contains(searchString, comp)).ToList();
             var m = new PeopleViewModel();
             m.People = filteredPeople;
             if (filteredPeople.Count == 0)
@@ -60,7 +64,7 @@ namespace Lexicon_MVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddPerson(PeopleViewModel p)
+        public IActionResult AddPerson(PeopleViewModel p, int cityId)
         {
 
             if (ModelState.IsValid)
@@ -69,7 +73,7 @@ namespace Lexicon_MVC.Controllers
                 var newPerson = new Person()
                 {
                     Name = p.cpvm.Name,
-                    City = p.cpvm.City,
+                    CityId = cityId,
                     PhoneNumber = p.cpvm.PhoneNumber,
                 };
                 _dbContext.People.Add(newPerson);
@@ -81,7 +85,7 @@ namespace Lexicon_MVC.Controllers
             {
                 var i = ModelState.ErrorCount;
             }
-
+            ViewBag.CityNames = new SelectList(_dbContext.Cities, "CityId", "CityName");
             return View("Index", peopleViewModel);
         }
 
