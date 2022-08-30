@@ -10,7 +10,6 @@ namespace Lexicon_MVC.Controllers
     {
 
         public static PeopleViewModel peopleViewModel = new PeopleViewModel();
-        private static int idCounter = peopleViewModel.People.Count;
         readonly ApplicationDbContext? _dbContext; // creates a readonly of DbContext
 
         public PeopleController(ApplicationDbContext? dbContext) // Adds a context to a constructor
