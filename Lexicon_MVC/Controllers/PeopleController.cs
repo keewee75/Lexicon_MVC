@@ -21,7 +21,7 @@ namespace Lexicon_MVC.Controllers
         public IActionResult Index()
         {
             peopleViewModel.People = _dbContext.People.ToList();
-            
+
             return View(peopleViewModel);
         }
 
@@ -51,15 +51,14 @@ namespace Lexicon_MVC.Controllers
         {
 
             //ta bort personen med rätt id
-            
-            using (_dbContext)
-            {
-               var removePerson = new Person() { PersonId = id };
-                _dbContext.People.Remove(removePerson);
-                _dbContext.SaveChanges();
-                peopleViewModel.People = _dbContext.People.ToList();
-            }
-            
+
+
+            var removePerson = new Person() { PersonId = id };
+            _dbContext.People.Remove(removePerson);
+            _dbContext.SaveChanges();
+            peopleViewModel.People = _dbContext.People.ToList();
+
+
             return View("Index", peopleViewModel);
         }
 
@@ -69,24 +68,23 @@ namespace Lexicon_MVC.Controllers
 
             if (ModelState.IsValid)
             {
-                using (_dbContext)
+
+                var newPerson = new Person()
                 {
-                    var newPerson = new Person()
-                    {
-                        Name = p.cpvm.Name,
-                        City = p.cpvm.City,
-                        PhoneNumber = p.cpvm.PhoneNumber,
-                    };
-                    _dbContext.People.Add(newPerson);
-                    _dbContext.SaveChanges();
-                    peopleViewModel.People = _dbContext.People.ToList();
-                }
+                    Name = p.cpvm.Name,
+                    City = p.cpvm.City,
+                    PhoneNumber = p.cpvm.PhoneNumber,
+                };
+                _dbContext.People.Add(newPerson);
+                _dbContext.SaveChanges();
+                peopleViewModel.People = _dbContext.People.ToList();
+
             }
             else
             {
                 var i = ModelState.ErrorCount;
             }
-            
+
             return View("Index", peopleViewModel);
         }
 
