@@ -42,6 +42,7 @@ namespace Lexicon_MVC.Controllers
             {
                 ViewBag.Message = "No data was found for your search criteria";
             }
+
             return View("Index", m);
         }
 
@@ -50,7 +51,7 @@ namespace Lexicon_MVC.Controllers
         {
 
             //ta bort personen med rätt id
-            //peopleViewModel.People.RemoveAll(x => x.PersonId == id);
+            
             using (_dbContext)
             {
                var removePerson = new Person() { PersonId = id };
@@ -59,9 +60,7 @@ namespace Lexicon_MVC.Controllers
                 peopleViewModel.People = _dbContext.People.ToList();
             }
             
-
             return View("Index", peopleViewModel);
-
         }
 
         [HttpPost]
