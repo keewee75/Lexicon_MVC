@@ -61,22 +61,37 @@ namespace Lexicon_MVC.Controllers
         [HttpPost]
         public IActionResult AddPerson(PeopleViewModel p)
         {
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
+            //{
+            //    peopleViewModel.People.Add(new Person()
+            //    {
+            //        PersonId = idCounter + 1,
+            //        Name = p.cpvm.Name,
+            //        City = p.cpvm.City,
+            //        PhoneNumber = p.cpvm.PhoneNumber
+            //    });
+            //    idCounter++;
+            //}
+            //else
+            //{
+            //    var i = ModelState.ErrorCount;
+            //}
+
+
+            using (_dbContext)
             {
-                peopleViewModel.People.Add(new Person()
+                var newPerson = new Person()
                 {
-                    PersonId = idCounter + 1,
                     Name = p.cpvm.Name,
                     City = p.cpvm.City,
-                    PhoneNumber = p.cpvm.PhoneNumber
-                });
-                idCounter++;
-            }
-            else
-            {
-                var i = ModelState.ErrorCount;
+                    PhoneNumber = p.cpvm.PhoneNumber,
+                };
+                _dbContext.People.Add(newPerson);
+                _dbContext.SaveChanges();
+                peopleViewModel.People = _dbContext.People.ToList();
             }
 
+            
 
             return View("Index", peopleViewModel);
         }
