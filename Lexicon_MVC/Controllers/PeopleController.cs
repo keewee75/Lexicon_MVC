@@ -22,7 +22,6 @@ namespace Lexicon_MVC.Controllers
         public IActionResult Index()
         {
             ViewBag.CityNames = new SelectList(_dbContext.Cities, "CityId", "CityName");
-            //peopleViewModel.People = _dbContext.People.ToList();
             peopleViewModel.People = _dbContext.People.Include(c => c.City).ToList();
 
             return View(peopleViewModel);
@@ -32,6 +31,7 @@ namespace Lexicon_MVC.Controllers
         {
             if (String.IsNullOrEmpty(searchString))
             {
+                ViewBag.CityNames = new SelectList(_dbContext.Cities, "CityId", "CityName");
                 ViewBag.Message = "";
                 return View("Index", peopleViewModel);
             }
@@ -60,6 +60,7 @@ namespace Lexicon_MVC.Controllers
             _dbContext.SaveChanges();
             peopleViewModel.People = _dbContext.People.ToList();
 
+            ViewBag.CityNames = new SelectList(_dbContext.Cities, "CityId", "CityName");
             return View("Index", peopleViewModel);
         }
 
