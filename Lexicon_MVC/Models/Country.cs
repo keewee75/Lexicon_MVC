@@ -4,7 +4,7 @@
     {
         public int CountryId { get; set; }
         public string CountryName { get; set; }
-        public ICollection<City> Cities { get; set; }
+        public ICollection<City> Cities { get; set; } = new List<City>();
         
     }
 }

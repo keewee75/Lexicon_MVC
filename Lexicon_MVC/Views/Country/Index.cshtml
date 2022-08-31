@@ -1,5 +1,31 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<Country>
+
 @{
+	ViewData["Title"] = "Index";
 }
+
+<h1>Countries</h1>
+
+
+<!-- List Countries -->
+<table class=" table table-striped">
+
+	<th>Id</th>
+	<th>Country</th>
+
+
+	@foreach (var country in Model)
+	{
+		<tr>
+			<td>@country.CountryId</td>
+			<td>
+				@*@country.CountryName*@
+				<select class="form-control" asp-items="ViewBag.CityNames">
+					<option value="" selected disabled>@country.CountryName</option>
+				</select>
+			</td>
+
+		</tr>
+	}
+
+</table>

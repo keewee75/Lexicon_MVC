@@ -1,4 +1,5 @@
 ﻿using Lexicon_MVC.Data;
+using Lexicon_MVC.Models;
 using Lexicon_MVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,9 +18,10 @@ namespace Lexicon_MVC.Controllers
 
         public IActionResult Index()
         {
-            cityViewModel.Cities = _dbContext.Cities.Include(c => c.Country).ToList(); // Includes also countries
 
-            return View(cityViewModel);
+            List<City> listOfCities = _dbContext.Cities.ToList();
+
+            return View(listOfCities);
         }
     }
 }
