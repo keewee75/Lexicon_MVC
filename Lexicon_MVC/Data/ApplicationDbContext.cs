@@ -24,6 +24,8 @@ namespace Lexicon_MVC.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+            
             //modelBuilder.Entity<Person>().HasData(new Person { PersonId = 1, Name = "Marko Kivi", City = "Gothenburg", PhoneNumber = "031 123 345" });
             //modelBuilder.Entity<Person>().HasData(new Person { PersonId = 2, Name = "Emil Kivi", City = "Gothenburg", PhoneNumber = "031 222 333" });
             //modelBuilder.Entity<Person>().HasData(new Person { PersonId = 3, Name = "Johnny Brott", City = "Stockholm", PhoneNumber = "08 666 777" });
@@ -43,6 +45,16 @@ namespace Lexicon_MVC.Data
             modelBuilder.Entity<Person>().HasData(new Person { PersonId = 2, Name = "Emil Kivi", CityId = 2, PhoneNumber = "031 222 333" });
             modelBuilder.Entity<Person>().HasData(new Person { PersonId = 3, Name = "Johnny Brott", CityId = 1, PhoneNumber = "08 666 777" });
             modelBuilder.Entity<Person>().HasData(new Person { PersonId = 4, Name = "Håkan Bråkan", CityId = 3, PhoneNumber = "040 111 555" });
+
+            modelBuilder.Entity<Language>().HasData(new Language { LanguageId = 1, LanguageName = "Swedish" });
+            modelBuilder.Entity<Language>().HasData(new Language { LanguageId = 2, LanguageName = "Norwegian" });
+            modelBuilder.Entity<Language>().HasData(new Language { LanguageId = 3, LanguageName = "Finnish" });
+            modelBuilder.Entity<Language>().HasData(new Language { LanguageId = 4, LanguageName = "Danish" });
+
+            modelBuilder.Entity<Person>()
+                .HasMany(p => p.Languages)
+                .WithMany(c => c.People)
+                .UsingEntity(j => j.HasData(new { PeoplePersonId = 2, LanguagesLanguageId = 3 }));
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Lexicon_MVC.Models
 
         public City City { get; set; }
         public int CityId { get; set; }
-        public List<Language> People { get; set; } = new List<Language>();
+        public List<Language> Languages { get; set; } = new List<Language>();
 
     }
 }

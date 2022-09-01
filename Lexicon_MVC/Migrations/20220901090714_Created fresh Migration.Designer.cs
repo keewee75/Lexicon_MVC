@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lexicon_MVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220830142515_newInit")]
-    partial class newInit
+    [Migration("20220901090714_Created fresh Migration")]
+    partial class CreatedfreshMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,21 @@ namespace Lexicon_MVC.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("LanguagePerson", b =>
+                {
+                    b.Property<int>("LanguagesLanguageId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PeoplePersonId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LanguagesLanguageId", "PeoplePersonId");
+
+                    b.HasIndex("PeoplePersonId");
+
+                    b.ToTable("LanguagePerson");
+                });
 
             modelBuilder.Entity("Lexicon_MVC.Models.City", b =>
                 {
@@ -63,6 +78,12 @@ namespace Lexicon_MVC.Migrations
                             CityId = 3,
                             CityName = "Helsinki",
                             CountryId = 3
+                        },
+                        new
+                        {
+                            CityId = 4,
+                            CityName = "Copenhagen",
+                            CountryId = 4
                         });
                 });
 
@@ -80,7 +101,7 @@ namespace Lexicon_MVC.Migrations
 
                     b.HasKey("CountryId");
 
-                    b.ToTable("Country");
+                    b.ToTable("Countries");
 
                     b.HasData(
                         new
@@ -97,6 +118,50 @@ namespace Lexicon_MVC.Migrations
                         {
                             CountryId = 3,
                             CountryName = "Finland"
+                        },
+                        new
+                        {
+                            CountryId = 4,
+                            CountryName = "Denmark"
+                        });
+                });
+
+            modelBuilder.Entity("Lexicon_MVC.Models.Language", b =>
+                {
+                    b.Property<int>("LanguageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LanguageId"), 1L, 1);
+
+                    b.Property<string>("LanguageName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("LanguageId");
+
+                    b.ToTable("Languages");
+
+                    b.HasData(
+                        new
+                        {
+                            LanguageId = 1,
+                            LanguageName = "Swedish"
+                        },
+                        new
+                        {
+                            LanguageId = 2,
+                            LanguageName = "Norwegian"
+                        },
+                        new
+                        {
+                            LanguageId = 3,
+                            LanguageName = "Finnish"
+                        },
+                        new
+                        {
+                            LanguageId = 4,
+                            LanguageName = "Danish"
                         });
                 });
 
@@ -152,6 +217,21 @@ namespace Lexicon_MVC.Migrations
                             Name = "Håkan Bråkan",
                             PhoneNumber = "040 111 555"
                         });
+                });
+
+            modelBuilder.Entity("LanguagePerson", b =>
+                {
+                    b.HasOne("Lexicon_MVC.Models.Language", null)
+                        .WithMany()
+                        .HasForeignKey("LanguagesLanguageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Lexicon_MVC.Models.Person", null)
+                        .WithMany()
+                        .HasForeignKey("PeoplePersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Lexicon_MVC.Models.City", b =>

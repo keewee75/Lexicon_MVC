@@ -4,12 +4,12 @@
 
 namespace Lexicon_MVC.Migrations
 {
-    public partial class newInit : Migration
+    public partial class CreatedfreshMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Country",
+                name: "Countries",
                 columns: table => new
                 {
                     CountryId = table.Column<int>(type: "int", nullable: false)
@@ -18,7 +18,20 @@ namespace Lexicon_MVC.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Country", x => x.CountryId);
+                    table.PrimaryKey("PK_Countries", x => x.CountryId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Languages",
+                columns: table => new
+                {
+                    LanguageId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LanguageName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Languages", x => x.LanguageId);
                 });
 
             migrationBuilder.CreateTable(
@@ -34,9 +47,9 @@ namespace Lexicon_MVC.Migrations
                 {
                     table.PrimaryKey("PK_Cities", x => x.CityId);
                     table.ForeignKey(
-                        name: "FK_Cities_Country_CountryId",
+                        name: "FK_Cities_Countries_CountryId",
                         column: x => x.CountryId,
-                        principalTable: "Country",
+                        principalTable: "Countries",
                         principalColumn: "CountryId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -62,35 +75,62 @@ namespace Lexicon_MVC.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
-                table: "Country",
-                columns: new[] { "CountryId", "CountryName" },
-                values: new object[] { 1, "Sweden" });
+            migrationBuilder.CreateTable(
+                name: "LanguagePerson",
+                columns: table => new
+                {
+                    LanguagesLanguageId = table.Column<int>(type: "int", nullable: false),
+                    PeoplePersonId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LanguagePerson", x => new { x.LanguagesLanguageId, x.PeoplePersonId });
+                    table.ForeignKey(
+                        name: "FK_LanguagePerson_Languages_LanguagesLanguageId",
+                        column: x => x.LanguagesLanguageId,
+                        principalTable: "Languages",
+                        principalColumn: "LanguageId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_LanguagePerson_People_PeoplePersonId",
+                        column: x => x.PeoplePersonId,
+                        principalTable: "People",
+                        principalColumn: "PersonId",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.InsertData(
-                table: "Country",
+                table: "Countries",
                 columns: new[] { "CountryId", "CountryName" },
-                values: new object[] { 2, "Norway" });
+                values: new object[,]
+                {
+                    { 1, "Sweden" },
+                    { 2, "Norway" },
+                    { 3, "Finland" },
+                    { 4, "Denmark" }
+                });
 
             migrationBuilder.InsertData(
-                table: "Country",
-                columns: new[] { "CountryId", "CountryName" },
-                values: new object[] { 3, "Finland" });
+                table: "Languages",
+                columns: new[] { "LanguageId", "LanguageName" },
+                values: new object[,]
+                {
+                    { 1, "Swedish" },
+                    { 2, "Norwegian" },
+                    { 3, "Finnish" },
+                    { 4, "Danish" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Cities",
                 columns: new[] { "CityId", "CityName", "CountryId" },
-                values: new object[] { 1, "Gothenburg", 1 });
-
-            migrationBuilder.InsertData(
-                table: "Cities",
-                columns: new[] { "CityId", "CityName", "CountryId" },
-                values: new object[] { 2, "Oslo", 2 });
-
-            migrationBuilder.InsertData(
-                table: "Cities",
-                columns: new[] { "CityId", "CityName", "CountryId" },
-                values: new object[] { 3, "Helsinki", 3 });
+                values: new object[,]
+                {
+                    { 1, "Gothenburg", 1 },
+                    { 2, "Oslo", 2 },
+                    { 3, "Helsinki", 3 },
+                    { 4, "Copenhagen", 4 }
+                });
 
             migrationBuilder.InsertData(
                 table: "People",
@@ -109,6 +149,11 @@ namespace Lexicon_MVC.Migrations
                 column: "CountryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_LanguagePerson_PeoplePersonId",
+                table: "LanguagePerson",
+                column: "PeoplePersonId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_People_CityId",
                 table: "People",
                 column: "CityId");
@@ -117,13 +162,19 @@ namespace Lexicon_MVC.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "LanguagePerson");
+
+            migrationBuilder.DropTable(
+                name: "Languages");
+
+            migrationBuilder.DropTable(
                 name: "People");
 
             migrationBuilder.DropTable(
                 name: "Cities");
 
             migrationBuilder.DropTable(
-                name: "Country");
+                name: "Countries");
         }
     }
 }
