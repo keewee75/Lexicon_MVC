@@ -1,6 +1,8 @@
 ﻿using Lexicon_MVC.Data;
+using Lexicon_MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace Lexicon_MVC.Controllers
 {
@@ -13,7 +15,8 @@ namespace Lexicon_MVC.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            List<Person> people = _dbContext.People.Include(p=>p.Languages).ToList();
+            return View(people);
         }
         public IActionResult AddPersonAndLanguage()
         {
