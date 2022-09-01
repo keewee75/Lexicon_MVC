@@ -13,19 +13,11 @@
 	<th>Id</th>
 	<th>Country</th>
 
-
 	@foreach (var country in Model)
 	{
 		<tr>
 			<td>@country.CountryId</td>
-			<td>
-				@*@country.CountryName*@
-				<select class="form-control" asp-items="ViewBag.CityNames">
-					<option value="" selected disabled>@country.CountryName</option>
-				</select>
-			</td>
-
+			<td>@country.CountryName</td>
 		</tr>
 	}
-
 </table>
