@@ -31,18 +31,19 @@ namespace Lexicon_MVC.Controllers
             {
                 var person = _dbContext.People.FirstOrDefault(x => x.PersonId == personId);
                 var language = _dbContext.Languages.FirstOrDefault(x => x.LanguageId == languageId);
-                //var p = person.Languages(p => p.LanguageId == languageId);
-                List<Language> AllLanguages = _dbContext.Languages.Include(p => p.People).ToList();
-                foreach (var lang in AllLanguages)
+
+                List<Person> people = _dbContext.People.Include(p => p.Languages).ToList();
+                // Prevents duplicates to be inserted
+                foreach (var pers in people)
                 {
-                    if (lang.LanguageId == languageId)
+                    if (pers.PersonId == personId)
                     {
-                        foreach (var pers in lang.People)
+                        foreach (var lang in pers.Languages)
                         {
-                            if (pers.PersonId == personId)
+                            if (lang.LanguageId == languageId)
                             {
                                 ViewBag.Exists = "Already exists";
-                                List<Person> people = _dbContext.People.Include(p => p.Languages).ToList();
+
                                 return View("Index", people);
                             }
                         }
