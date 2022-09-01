@@ -20,6 +20,7 @@ namespace Lexicon_MVC.Data
         public DbSet<Person> People { get; set; } // Use DbSet to create table named People based on class Person
         public DbSet<City> Cities { get; set; }
         public DbSet<Country> Countries { get; set; }
+        public DbSet<Language> Languages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,10 +32,12 @@ namespace Lexicon_MVC.Data
             modelBuilder.Entity<Country>().HasData(new Country { CountryId = 1, CountryName = "Sweden" });
             modelBuilder.Entity<Country>().HasData(new Country { CountryId = 2, CountryName = "Norway" });
             modelBuilder.Entity<Country>().HasData(new Country { CountryId = 3, CountryName = "Finland" });
+            modelBuilder.Entity<Country>().HasData(new Country { CountryId = 4, CountryName = "Denmark" });
 
             modelBuilder.Entity<City>().HasData(new City { CityId = 1, CityName = "Gothenburg", CountryId = 1 });
             modelBuilder.Entity<City>().HasData(new City { CityId = 2, CityName = "Oslo", CountryId = 2 });
             modelBuilder.Entity<City>().HasData(new City { CityId = 3, CityName = "Helsinki", CountryId = 3 });
+            modelBuilder.Entity<City>().HasData(new City { CityId = 4, CityName = "Copenhagen", CountryId = 4 });
 
             modelBuilder.Entity<Person>().HasData(new Person { PersonId = 1, Name = "Marko Kivi", CityId = 1 , PhoneNumber = "031 123 345" });
             modelBuilder.Entity<Person>().HasData(new Person { PersonId = 2, Name = "Emil Kivi", CityId = 2, PhoneNumber = "031 222 333" });
