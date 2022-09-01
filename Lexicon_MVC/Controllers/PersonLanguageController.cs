@@ -15,14 +15,14 @@ namespace Lexicon_MVC.Controllers
         {
             return View();
         }
-        public IActionResult ShowPersonAndLanguage()
+        public IActionResult AddPersonAndLanguage()
         {
             ViewBag.People = new SelectList(_dbContext.People, "PersonId", "Name");
             ViewBag.Languages = new SelectList(_dbContext.Languages, "LanguageId", "LanguageName");
             return View();
         }
         [HttpPost]
-        public IActionResult ShowPersonAndLanguage(int personId, int languageId)
+        public IActionResult AddPersonAndLanguage(int personId, int languageId)
         {
             var person = _dbContext.People.FirstOrDefault(x => x.PersonId == personId);
             var language = _dbContext.Languages.FirstOrDefault(x => x.LanguageId == languageId);

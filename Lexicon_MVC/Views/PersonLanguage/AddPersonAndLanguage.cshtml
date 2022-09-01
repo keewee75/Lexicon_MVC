@@ -1,11 +1,11 @@
 ﻿
 @{
-    ViewData["Title"] = "ShowPersonAndLanguage";
+    ViewData["Title"] = "AddPersonAndLanguage";
 }
 
-<h1>ShowPersonAndLanguage</h1>
+<h1>AddPersonAndLanguage</h1>
 
-<form asp-action="ShowPersonAndLanguage" method="post">
+<form asp-action="AddPersonAndLanguage" method="post">
 	<div class="form-group">
 		<label>Person: </label>
 		<select name="personId" class="form-control" asp-items="ViewBag.People"></select>
@@ -14,5 +14,5 @@
 		<lable>Language: </lable>
 		<select name="languageId" class="form-control" asp-items="ViewBag.Languages"></select>
 	</div>
-	<input type="submit" value="Show Person language" class="btn btn-primary" />
+	<input type="submit" value="Add Person language" class="btn btn-primary" />
 </form>
