@@ -18,10 +18,7 @@ namespace Lexicon_MVC.Controllers
         }
 
         public IActionResult Index()
-        {
-            
-            
-            
+        {          
             ViewBag.CityNames = new SelectList(_dbContext.Cities, "CityId", "CityName");
             return View(_dbContext.Countries.Include(p => p.Cities).ToList());
         }

@@ -5,14 +5,19 @@
 	string languages = "";
 }
 
-<h1>Person Language</h1>
+<h1>Persons Language</h1>
+
+
+<p>
+	<a asp-action="AddLanguage" class="btn btn-secondary btn-sm" role="button">Add language</a>
+</p>
 
 
 <!-- List Persons and Languages -->
 <table class=" table table-striped">
 
 	<th>Name</th>
-	<th>Language</th>
+	<th>Language(s)</th>
 
 	@foreach (var person in Model)
 	{
@@ -21,14 +26,18 @@
 
 			@foreach (var language in person.Languages)
 			{
-				languages = languages + language.LanguageName + ", ";
+				languages = languages + language.LanguageName + " ";
 
 			}
 			<td>@languages</td>
 		</tr>
-		
-			languages = "";
+
+		languages = "";
 	}
 </table>
+
+<div>
+	<span>@ViewBag.Exists</span>
+</div>
 
 

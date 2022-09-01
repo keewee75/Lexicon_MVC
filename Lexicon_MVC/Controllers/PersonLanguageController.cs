@@ -15,23 +15,45 @@ namespace Lexicon_MVC.Controllers
         }
         public IActionResult Index()
         {
-            List<Person> people = _dbContext.People.Include(p=>p.Languages).ToList();
+            List<Person> people = _dbContext.People.Include(p => p.Languages).ToList();
             return View(people);
         }
-        public IActionResult AddPersonAndLanguage()
+        public IActionResult AddLanguage()
         {
             ViewBag.People = new SelectList(_dbContext.People, "PersonId", "Name");
             ViewBag.Languages = new SelectList(_dbContext.Languages, "LanguageId", "LanguageName");
             return View();
         }
         [HttpPost]
-        public IActionResult AddPersonAndLanguage(int personId, int languageId)
+        public IActionResult AddLanguage(int personId, int languageId)
         {
-            var person = _dbContext.People.FirstOrDefault(x => x.PersonId == personId);
-            var language = _dbContext.Languages.FirstOrDefault(x => x.LanguageId == languageId);
+            if (ModelState.IsValid)
+            {
+                var person = _dbContext.People.FirstOrDefault(x => x.PersonId == personId);
+                var language = _dbContext.Languages.FirstOrDefault(x => x.LanguageId == languageId);
+                //var p = person.Languages(p => p.LanguageId == languageId);
+                List<Language> AllLanguages = _dbContext.Languages.Include(p => p.People).ToList();
+                foreach (var lang in AllLanguages)
+                {
+                    if (lang.LanguageId == languageId)
+                    {
+                        foreach (var pers in lang.People)
+                        {
+                            if (pers.PersonId == personId)
+                            {
+                                ViewBag.Exists = "Already exists";
+                                List<Person> people = _dbContext.People.Include(p => p.Languages).ToList();
+                                return View("Index", people);
+                            }
+                        }
+                    }
 
-            person.Languages.Add(language);
-            _dbContext.SaveChanges();
+                }
+
+                person.Languages.Add(language);
+                _dbContext.SaveChanges();
+
+            }
 
             return RedirectToAction("Index");
         }

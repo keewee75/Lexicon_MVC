@@ -55,6 +55,11 @@ namespace Lexicon_MVC.Data
                 .HasMany(p => p.Languages)
                 .WithMany(c => c.People)
                 .UsingEntity(j => j.HasData(new { PeoplePersonId = 2, LanguagesLanguageId = 3 }));
+
+            modelBuilder.Entity<Person>()
+                .HasMany(p => p.Languages)
+                .WithMany(c => c.People)
+                .UsingEntity(j => j.HasData(new { PeoplePersonId = 2, LanguagesLanguageId = 1 }));
         }
     }
 }
