@@ -17,19 +17,17 @@ namespace Lexicon_MVC.Data
 
         }
 
-        public DbSet<Person> People { get; set; } // Use DbSet to create table named People based on class Person
+        // Use DbSet to create table based on class
+        public DbSet<Person> People { get; set; } 
         public DbSet<City> Cities { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Language> Languages { get; set; }
 
+
+        // Use OnModelCreating to Seed data to database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            
-            //modelBuilder.Entity<Person>().HasData(new Person { PersonId = 1, Name = "Marko Kivi", City = "Gothenburg", PhoneNumber = "031 123 345" });
-            //modelBuilder.Entity<Person>().HasData(new Person { PersonId = 2, Name = "Emil Kivi", City = "Gothenburg", PhoneNumber = "031 222 333" });
-            //modelBuilder.Entity<Person>().HasData(new Person { PersonId = 3, Name = "Johnny Brott", City = "Stockholm", PhoneNumber = "08 666 777" });
-            //modelBuilder.Entity<Person>().HasData(new Person { PersonId = 4, Name = "Håkan Bråkan", City = "Helsingborg", PhoneNumber = "040 111 555" });
 
             modelBuilder.Entity<Country>().HasData(new Country { CountryId = 1, CountryName = "Sweden" });
             modelBuilder.Entity<Country>().HasData(new Country { CountryId = 2, CountryName = "Norway" });

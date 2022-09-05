@@ -6,18 +6,13 @@
 
 <h1>People</h1>
 
-@*<form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-</form>*@
-
 <!-- Search/Filter Person -->
 <form asp-controller="People" asp-action="Search">
 	<div class="input-group mb-3 w-50">
 		<div class="col-sm-4">
 			<input type="text" name="searchString" class="form-control" placeholder="Search..." aria-label="search" aria-describedby="basic-addon1">
 		</div>
-		<button asp-controller="People" asp-action="Search" class="btn btn-success" type="submit">Filter</button>
+		<button asp-controller="People" asp-action="Search" class="btn btn-success btn-sm" type="submit">Filter</button>
 	</div>
 </form>
 
@@ -52,7 +47,7 @@
 
 	<div class="form-group row">
 		<div class="col-sm-10">
-			<button type="submit" class="btn btn-primary">Add Person</button>
+			<button type="submit" class="btn btn-secondary btn-sm">Add Person</button>
 		</div>
 	</div>
 </form>
