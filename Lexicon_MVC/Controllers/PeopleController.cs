@@ -76,8 +76,7 @@ namespace Lexicon_MVC.Controllers
 
             return RedirectToAction("Index");
         }
-
-        [HttpPost]
+     
         public IActionResult Delete(int id)
         {
 
@@ -117,6 +116,5 @@ namespace Lexicon_MVC.Controllers
             ViewBag.CityNames = new SelectList(_dbContext.Cities, "CityId", "CityName");
             return View("Index", peopleViewModel);
         }
-
     }
 }
