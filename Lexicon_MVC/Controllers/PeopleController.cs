@@ -51,16 +51,27 @@ namespace Lexicon_MVC.Controllers
 
         public IActionResult Edit(int id)
         {
-            ViewBag.CityNames = new SelectList(_dbContext.Cities, "CityId", "CityName");
+           // ViewBag.CityNames = new SelectList(_dbContext.Cities, "CityId", "CityName");
+            //ViewBag.CityNames = _dbContext.Cities.ToList();
             var person = _dbContext.People.FirstOrDefault(x=> x.PersonId == id);
-            return View(person);
+            EditPersonViewModel m = new EditPersonViewModel();
+            m.Name = person.Name;
+            m.PersonId = person.PersonId;
+            m.CityId = person.CityId;
+            m.PhoneNumber = person.PhoneNumber;
+            m.Cities = _dbContext.Cities.ToList();
+            return View(m);
         }
 
         [HttpPost]
-        public IActionResult Edit(Person person)
+        public IActionResult Edit(EditPersonViewModel m)
         {
-            
-            _dbContext.Update(person);
+            Person p = new Person();
+            p.Name = m.Name;
+            p.PersonId = m.PersonId;
+            p.CityId = m.CityId;
+            p.PhoneNumber = m.PhoneNumber;
+            _dbContext.Update(p);
             _dbContext.SaveChanges();
 
             return RedirectToAction("Index");
@@ -85,7 +96,7 @@ namespace Lexicon_MVC.Controllers
         public IActionResult AddPerson(PeopleViewModel p, int cityId)
         {
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && cityId > 0)
             {
 
                 var newPerson = new Person()

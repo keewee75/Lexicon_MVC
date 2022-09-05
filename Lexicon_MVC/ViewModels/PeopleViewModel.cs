@@ -10,7 +10,7 @@ namespace Lexicon_MVC.ViewModels
         public bool deleteSuccess { get; set; } = false;
         public string personDeleted { get; set; } = "";
 
-    public PeopleViewModel()
+        public PeopleViewModel()
         {
             People = new List<Person>();
 
