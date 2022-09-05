@@ -2,6 +2,7 @@
 using Lexicon_MVC.Models;
 using Lexicon_MVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lexicon_MVC.Controllers
@@ -26,17 +27,19 @@ namespace Lexicon_MVC.Controllers
 
         public IActionResult Create()
         {
+            //ViewBag.Cities = new SelectList(_dbContext.Cities, "CityId", "CityName");
+            ViewBag.Countries = new SelectList(_dbContext.Countries, "CountryId", "CountryName");
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(City city)
         {
-            if(ModelState.IsValid)
-            {
-                _dbContext.Cities.Add(city);
-                _dbContext.SaveChanges();
-            }
+            //var country = _dbContext.Countries.FirstOrDefault(x => x.CountryId == countryId);
+
+            _dbContext.Cities.Add(city);
+            _dbContext.SaveChanges();
+
             return RedirectToAction("Index");
         }
     }
