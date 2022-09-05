@@ -1,18 +1,28 @@
 ﻿@model Person
 
 <tr>
-    <td>@Model.PersonId</td>
-    <td>@Model.Name</td>
-    <td>@Model.City.CityName</td>
-    <td>@Model.PhoneNumber</td>
-    <td>
-<form method="post">
- <button
-    class="btn"
-    asp-controller="People"
-    asp-action="Delete"
-    asp-route-id="@Model.PersonId"
->Delete</button>
-</form>
-</td>
+	<td>@Model.PersonId</td>
+	<td>@Model.Name</td>
+	<td>@Model.City.CityName</td>
+	<td>@Model.PhoneNumber</td>
+
+	<td>
+		<form method="get">
+
+			<button class="btn btn-secondary btn-sm"
+					asp-controller="People"
+					asp-action="Edit"
+					asp-route-id="@Model.PersonId">
+				Edit
+			</button>
+		</form>
+		<form method="post">
+			<button method="post" class="btn btn-secondary btn-sm"
+					asp-controller="People"
+					asp-action="Delete"
+					asp-route-id="@Model.PersonId">
+				Delete
+			</button>
+		</form>
+	</td>
 </tr>

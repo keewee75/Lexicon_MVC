@@ -49,6 +49,23 @@ namespace Lexicon_MVC.Controllers
             return View("Index", m);
         }
 
+        public IActionResult Edit(int id)
+        {
+            ViewBag.CityNames = new SelectList(_dbContext.Cities, "CityId", "CityName");
+            var person = _dbContext.People.FirstOrDefault(x=> x.PersonId == id);
+            return View(person);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Person person)
+        {
+            
+            _dbContext.Update(person);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
         [HttpPost]
         public IActionResult Delete(int id)
         {
