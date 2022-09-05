@@ -6,15 +6,16 @@
 
 <h1>Cities</h1>
 
-@*<p>
-	<a asp-action="Create">Add new City</a>
-</p>*@
+<p>
+	<a class="btn btn-secondary btn-sm" asp-action="Create">Add new City</a>
+</p>
 
 <!-- List Cities -->
 <table class=" table table-striped">
 
 	<th>Id</th>
 	<th>City</th>
+	<th></th>
 	
 
 
@@ -24,10 +25,10 @@
 			<td>@city.CityId</td>
 			<td>@city.CityName</td>
 
-			@*<td>
-				<a asp-action="Edit" asp-route-cityid="@city.CityId">Edit</a>
-				<a asp-action="Delete" asp-route-cityid="@city.CityId">Delete</a>
-			</td>*@
+			<td>
+				<a class="btn btn-secondary btn-sm" asp-action="Edit" asp-route-cityid="@city.CityId">Edit</a>
+				<a class="btn btn-secondary btn-sm" asp-action="Delete" asp-route-cityid="@city.CityId">Delete</a>
+			</td>
 
 		</tr>
 	}

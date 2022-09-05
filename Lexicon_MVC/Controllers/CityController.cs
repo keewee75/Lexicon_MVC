@@ -23,5 +23,21 @@ namespace Lexicon_MVC.Controllers
 
             return View(listOfCities);
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(City city)
+        {
+            if(ModelState.IsValid)
+            {
+                _dbContext.Cities.Add(city);
+                _dbContext.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
