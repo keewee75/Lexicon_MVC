@@ -64,12 +64,12 @@ namespace Lexicon_MVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(EditPersonViewModel m)
+        public IActionResult Edit(EditPersonViewModel m, int cityId)
         {
             Person p = new Person();
             p.Name = m.Name;
             p.PersonId = m.PersonId;
-            p.CityId = m.CityId;
+            p.CityId = cityId;
             p.PhoneNumber = m.PhoneNumber;
             _dbContext.Update(p);
             _dbContext.SaveChanges();

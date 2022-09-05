@@ -33,15 +33,15 @@
 			{
 					if (city.CityId == Model.CityId)
 					{
-						<option val="@city.CityId" selected>@city.CityName</option>
+						<option value="@city.CityId" selected>@city.CityName</option>
 					}else
 					{
 						
-					<option val="@city.CityId">@city.CityName</option>
 					}
+					<option value="@city.CityId">@city.CityName</option>
 			}
 			@*<select name="cityId" class="form-control" asp-items="ViewBag.CityNames">*@
-				<option value="" disabled>Select City</option>
+				@*<option value="" disabled>Select City</option>*@
 			</select>
 			<span asp-validation-for="CityId"></span>
 		</div>
