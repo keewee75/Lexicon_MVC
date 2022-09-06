@@ -10,10 +10,5 @@ namespace Lexicon_MVC.ViewModels
         public List<City> Cities  { get; set; } = new List<City>();
         public List<Country> Countries { get; set; } = new List<Country>();
 
-        //public CityViewModel()
-        //{
-        //    Cities = new List<City>();
-        //}
-            
     }
 }

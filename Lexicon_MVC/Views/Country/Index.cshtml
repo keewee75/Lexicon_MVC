@@ -6,18 +6,27 @@
 
 <h1>Countries</h1>
 
+<p>
+	<a class="btn btn-secondary btn-sm" asp-action="Create">Add new Country</a>
+</p>
 
 <!-- List Countries -->
 <table class=" table table-striped">
 
 	<th>Id</th>
 	<th>Country</th>
+	<th>Edit / Delete</th>
 
 	@foreach (var country in Model)
 	{
 		<tr>
 			<td>@country.CountryId</td>
 			<td>@country.CountryName</td>
+
+			<td>
+				<a class="btn btn-secondary btn-sm" asp-action="Edit" asp-route-countryid="@country.CountryId">Edit</a>
+				<a class="btn btn-secondary btn-sm" asp-action="Delete" asp-route-countryid="@country.CountryId">Delete</a>
+			</td>
 		</tr>
 	}
 </table>

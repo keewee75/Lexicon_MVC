@@ -19,8 +19,54 @@ namespace Lexicon_MVC.Controllers
 
         public IActionResult Index()
         {          
-            ViewBag.CityNames = new SelectList(_dbContext.Cities, "CityId", "CityName");
-            return View(_dbContext.Countries.Include(p => p.Cities).ToList());
+
+            List<Country> listOfCountries = _dbContext.Countries.ToList();
+
+            return View(listOfCountries);
+        }
+
+        public IActionResult Create()
+        {
+            ViewBag.Countries = new SelectList(_dbContext.Countries, "CountryId", "CountryName");
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Country country)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                _dbContext.Countries.Add(country);
+                _dbContext.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Edit(int countryid)
+        {
+            var country = _dbContext.Countries.FirstOrDefault(x=>x.CountryId == countryid);
+            return View(country);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Country country)
+        {
+            _dbContext.Update(country);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(int countryid)
+        {
+            var country = _dbContext.Countries.FirstOrDefault(x => x.CountryId == countryid);
+
+            _dbContext.Countries.Remove(country);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }

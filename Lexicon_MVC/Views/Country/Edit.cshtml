@@ -1,0 +1,30 @@
+﻿@model Country
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit Country</h1>
+
+<form asp-action="Edit" method="post">
+
+	<div class="form-group row">
+		<label asp-for="CountryId" class="col-sm-1 col-form-label">Country Id</label>
+		<div class="col-sm-1">
+			<input asp-for="CountryId" type="text" class="form-control" placeholder="CountryId" readonly="readonly">
+		</div>
+	</div>
+
+	<p></p>
+
+	<div class="form-group row">
+		<label asp-for="CountryName" class="col-sm-1 col-form-label">Edit Country</label>
+		<div class="col-sm-3">
+			<input asp-for="CountryName" type="text" class="form-control" placeholder="Type in country name..." />
+		</div>
+	</div>
+
+	<p></p>
+
+	<input type="submit" value="Save changes" class="btn btn-secondary btn-sm" />
+
+</form>
