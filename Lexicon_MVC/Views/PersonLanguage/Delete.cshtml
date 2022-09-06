@@ -1,0 +1,23 @@
+﻿@model Person
+@{
+	ViewData["Title"] = "EditLanguage";
+}
+
+<h1>Delete Language</h1>
+
+<form asp-action="Delete" method="post">
+	<div class="form-group col-sm-3">
+		<h2>Delete language for: @Model.Name </h2>
+		<label>
+			Select language: </labe>
+			<select name="languageId" class="form-control">
+				@foreach (var lang in Model.Languages)
+				{
+					<option value="@lang.LanguageId" >@lang.LanguageName</option>
+				}
+			</select>
+	</div>
+	<p></p>
+	<input type="submit" value="Delete" class="btn btn-secondary btn-sm" />
+</form>
+

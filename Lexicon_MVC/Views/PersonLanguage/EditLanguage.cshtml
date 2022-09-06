@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Person>
+@{
+    ViewData["Title"] = "EditLanguage";
+}
+
+<h1>Edit Language</h1>
+
+<form asp-action="EditLanguage" method="post">
+	<div class="form-group col-sm-3">
+		<label>Edit language for: </label>
+		<select name="personId" class="form-control" asp-items="ViewBag.People">
+			<option value="" selected disabled>Select Person</option>
+		</select>
+	</div>
+	<p></p>
+	<input type="submit" value="Submit" name="PersonId" class="btn btn-secondary btn-sm" />
+</form>

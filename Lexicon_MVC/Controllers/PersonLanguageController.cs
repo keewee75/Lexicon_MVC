@@ -58,5 +58,42 @@ namespace Lexicon_MVC.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public IActionResult EditLanguage(int personId)
+        {
+            ViewBag.People = new SelectList(_dbContext.People, "PersonId", "Name");
+            var filteredPerson = _dbContext.People
+                .Where(x => x.PersonId == personId).ToList();
+
+            return View(filteredPerson);
+        }
+
+        public IActionResult Delete(int personId)
+        {
+            Person p = _dbContext.People.FirstOrDefault(x => x.PersonId == personId);
+            List<Person> people = _dbContext.People.Include(p => p.Languages).ToList();
+            foreach (var pers in people)
+            {
+                if (pers.PersonId == personId)
+                {
+                    foreach (var lang in pers.Languages)
+                    {
+                        if (lang.LanguageId > 0)
+                        {
+                            //var l = _dbContext.Languages.FirstOrDefault(x => x.LanguageId == lang.LanguageId);
+                            p.Languages.Add(lang);
+
+                        }
+                    }
+                }
+            }
+            return View(p);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Person p, int languageId)
+        {
+            return RedirectToAction("Index");
+        }
     }
 }

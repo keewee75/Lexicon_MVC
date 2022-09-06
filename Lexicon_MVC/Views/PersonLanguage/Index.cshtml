@@ -7,10 +7,13 @@
 
 <h1>Persons Language</h1>
 
+<div class="form-group row">
+	<p>
+		<a asp-action="AddLanguage" class="btn btn-secondary btn-sm" role="button">Add language</a>
+		<a asp-action="EditLanguage" class="btn btn-secondary btn-sm" role="button">Edit person languages</a>
+	</p>
+</div>
 
-<p>
-	<a asp-action="AddLanguage" class="btn btn-secondary btn-sm" role="button">Add language</a>
-</p>
 
 
 <!-- List Persons and Languages -->
@@ -18,6 +21,7 @@
 
 	<th>Name</th>
 	<th>Language(s)</th>
+	<th>Delete</th>
 
 	@foreach (var person in Model)
 	{
@@ -30,6 +34,7 @@
 
 			}
 			<td>@languages</td>
+			<td><a class="btn btn-secondary btn-sm" asp-action="Delete" asp-route-personid="@person.PersonId">Edit</a></td>
 		</tr>
 
 		languages = "";
