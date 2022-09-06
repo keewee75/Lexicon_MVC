@@ -27,7 +27,6 @@ namespace Lexicon_MVC.Controllers
 
         public IActionResult Create()
         {
-            //ViewBag.Cities = new SelectList(_dbContext.Cities, "CityId", "CityName");
             ViewBag.Countries = new SelectList(_dbContext.Countries, "CountryId", "CountryName");
             return View();
         }
@@ -35,9 +34,46 @@ namespace Lexicon_MVC.Controllers
         [HttpPost]
         public IActionResult Create(City city)
         {
-            //var country = _dbContext.Countries.FirstOrDefault(x => x.CountryId == countryId);
+            ModelState.Remove("Country");
+            if (ModelState.IsValid)
+            {
+                _dbContext.Cities.Add(city);
+                _dbContext.SaveChanges();
+            }
+            
+            return RedirectToAction("Index");
+        }
 
-            _dbContext.Cities.Add(city);
+        public IActionResult Edit(int cityid)
+        {
+            ViewBag.Countries = new SelectList(_dbContext.Countries, "CountryId", "CountryName");
+            var city = _dbContext.Cities.FirstOrDefault(x => x.CityId == cityid);
+            CityViewModel m = new CityViewModel();
+            m.CityId = city.CityId;
+            m.CountryId = city.CountryId;
+            m.CityName = city.CityName;
+            m.Countries = _dbContext.Countries.ToList();
+            return View(m);
+        }
+
+        [HttpPost]
+        public IActionResult Edit (CityViewModel m, int countryId)
+        {
+            City p = new City();
+            p.CityId = m.CityId;
+            p.CountryId = countryId;
+            p.CityName = m.CityName;
+            _dbContext.Update(p);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(int cityid)
+        {
+            var city = _dbContext.Cities.FirstOrDefault(x=>x.CityId == cityid);
+
+            _dbContext.Cities.Remove(city);
             _dbContext.SaveChanges();
 
             return RedirectToAction("Index");

@@ -8,18 +8,21 @@
 <form asp-action="Create" method="post">
 
 	<div class="form-group">
-		@*<label asp-for="CityName" class="col-sm-1 col-form-label">City</label>*@
 		<label>Insert City</label>
-		<div class="col-sm-5">
+		<div class="col-sm-3">
 			<input asp-for="CityName" type="text" class="form-control" placeholder="Type in city name..." />
 		</div>
 	</div>
+
 	<p></p>
-	<div class="form-group col-sm-5">
+
+	<div class="form-group col-sm-3">
 		<label>Choose Country</label>
 		<select name="countryId" class="form-control" asp-items="ViewBag.Countries"></select>
 	</div>
+
 	<p></p>
+
 	<input type="submit" value="Create City" class="btn btn-secondary btn-sm" />
-	
+
 </form>

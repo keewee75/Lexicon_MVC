@@ -1,0 +1,54 @@
+﻿@model CityViewModel
+@*@model City*@
+@{
+	ViewData["Title"] = "Edit";
+}
+
+<h1>Edit City</h1>
+
+<form asp-action="Edit" method="post">
+
+	<div class="form-group row">
+		<label asp-for="CityId" class="col-sm-1 col-form-label">City Id</label>
+		<div class="col-sm-1">
+			<input asp-for="CityId" type="text" class="form-control" placeholder="CityId" readonly="readonly">
+		</div>
+	</div>
+
+	<p></p>
+
+	<div class="form-group row">
+		<label asp-for="CityName" class="col-sm-1 col-form-label">Edit City</label>
+		<div class="col-sm-3">
+			<input asp-for="CityName" type="text" class="form-control" placeholder="Type in city name..." />
+		</div>
+	</div>
+
+	<p></p>
+
+	<div class="form-group row">
+		<label asp-for="CountryId" class="col-sm-1 col-form-label">Edit country</label>
+		<div class="col-sm-3">
+			<select name="countryId" class="form-control">
+				@foreach (var country in Model.Countries)
+				{
+					if (country.CountryId == Model.CountryId)
+					{
+						<option value="@country.CountryId" selected>@country.CountryName</option>
+					}
+					else
+					{
+						<option value="@country.CountryId">@country.CountryName</option>
+					}
+					
+				}
+			</select>
+		</div>
+
+	</div>
+
+	<p></p>
+
+	<input type="submit" value="Save changes" class="btn btn-secondary btn-sm" />
+
+</form>

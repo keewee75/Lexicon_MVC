@@ -1,5 +1,4 @@
 ﻿@model EditPersonViewModel
-@*@model PeopleViewModel*@
 @{
 	ViewData["Title"] = "Edit";
 }
@@ -11,7 +10,7 @@
 
 	<div class="form-group row">
 		<label asp-for="PersonId" class="col-sm-1 col-form-label">Id</label>
-		<div class="col-sm-5">
+		<div class="col-sm-1">
 			<input asp-for="PersonId" type="text" class="form-control" placeholder="PersonId" readonly="readonly">
 			<span asp-validation-for="PersonId"></span>
 		</div>
@@ -19,7 +18,7 @@
 
 	<div class="form-group row">
 		<label asp-for="Name" class="col-sm-1 col-form-label">Name</label>
-		<div class="col-sm-5">
+		<div class="col-sm-3">
 			<input asp-for="Name" type="text" class="form-control" placeholder="Name">
 			<span asp-validation-for="Name"></span>
 		</div>
@@ -27,21 +26,20 @@
 
 	<div class="form-group row">
 		<label asp-for="CityId" class="col-sm-1 col-form-label">City</label>
-		<div class="col-sm-5">
+		<div class="col-sm-3">
 			<select asp-for="CityId" class="form-control">
-			@foreach (var city in Model.Cities)
-			{
+				@foreach (var city in Model.Cities)
+				{
 					if (city.CityId == Model.CityId)
 					{
 						<option value="@city.CityId" selected>@city.CityName</option>
-					}else
-					{
-						
 					}
-					<option value="@city.CityId">@city.CityName</option>
-			}
-			@*<select name="cityId" class="form-control" asp-items="ViewBag.CityNames">*@
-				@*<option value="" disabled>Select City</option>*@
+					else
+					{
+						<option value="@city.CityId">@city.CityName</option>
+					}
+
+				}
 			</select>
 			<span asp-validation-for="CityId"></span>
 		</div>
@@ -49,7 +47,7 @@
 
 	<div class="form-group row">
 		<label asp-for="PhoneNumber" class="col-sm-1 col-form-label">Phone</label>
-		<div class="col-sm-5">
+		<div class="col-sm-3">
 			<input type="text" class="form-control" asp-for="PhoneNumber" placeholder="Phone number">
 			<span asp-validation-for="PhoneNumber"></span>
 		</div>

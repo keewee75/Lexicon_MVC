@@ -21,7 +21,7 @@
 <form asp-controller="People" asp-action="AddPerson" method="post">
 	<div class="form-group row">
 		<label asp-for="cpvm.Name" class="col-sm-1 col-form-label">Name</label>
-		<div class="col-sm-5">
+		<div class="col-sm-3">
 			<input asp-for="cpvm.Name" type="text" class="form-control" placeholder="Type in name...">
 			<span asp-validation-for="cpvm.Name"></span>
 		</div>
@@ -29,7 +29,7 @@
 
 	<div class="form-group row">
 		<label asp-for="cpvm.CityId" class="col-sm-1 col-form-label">City </label>
-		<div class="col-sm-5">
+		<div class="col-sm-3">
 		<select name="cityId" class="form-control" asp-items="ViewBag.CityNames">
 			<option value="" selected disabled>Select City</option>
 		</select>
@@ -39,7 +39,7 @@
 	
 	<div class="form-group row">
 		<label asp-for="cpvm.PhoneNumber" class="col-sm-1 col-form-label"></label>
-		<div class="col-sm-5">
+		<div class="col-sm-3">
 			<input type="text" class="form-control" asp-for="cpvm.PhoneNumber" placeholder="Type in phone number...">
 			<span asp-validation-for="cpvm.PhoneNumber"></span>
 		</div>
@@ -61,7 +61,7 @@
 	<th>Name</th>
 	<th>City</th>
 	<th>Phone Number</th>
-	<th>Delete</th>
+	<th>Edit / Delete</th>
 
 	@foreach (var person in Model.People)
 	{

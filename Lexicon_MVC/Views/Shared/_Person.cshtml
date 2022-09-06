@@ -7,32 +7,9 @@
 	<td>@Model.PhoneNumber</td>
 
 	<td>
-	@*	<div>
-			<form method="get">
-
-				<button class="btn btn-secondary btn-sm"
-						asp-controller="People"
-						asp-action="Edit"
-						asp-route-id="@Model.PersonId">
-					Edit
-				</button>
-			</form>
-		</div>
-
-		<div>
-			<form method="post">
-				<button class="btn btn-secondary btn-sm"
-						asp-controller="People"
-						asp-action="Delete"
-						asp-route-id="@Model.PersonId">
-					Delete
-				</button>
-			</form>
-		</div>*@
 
 		<a class="btn btn-secondary btn-sm" asp-action="Edit" asp-route-id="@Model.PersonId">Edit</a>
 		<a class="btn btn-secondary btn-sm" asp-controller="People" asp-action="Delete" asp-route-id="@Model.PersonId">Delete</a>
-
 
 	</td>
 </tr>
