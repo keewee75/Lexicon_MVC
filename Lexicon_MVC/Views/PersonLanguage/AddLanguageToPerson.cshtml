@@ -5,7 +5,7 @@
 
 <h1>Add language</h1>
 
-<form asp-action="AddLanguage" method="post">
+<form asp-action="AddLanguageToPerson" method="post">
 	<div class="form-group col-sm-3">
 		<label>Person: </label>
 		<select name="personId" class="form-control" asp-items="ViewBag.People"></select>
@@ -15,5 +15,5 @@
 		<select name="languageId" class="form-control" asp-items="ViewBag.Languages"></select>
 	</div>
 	<p></p>
-	<input type="submit" value="Add Language" class="btn btn-secondary btn-sm" />
+	<input type="submit" value="Add language to person" class="btn btn-secondary btn-sm" />
 </form>

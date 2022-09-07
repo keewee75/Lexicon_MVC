@@ -5,12 +5,11 @@
 	string languages = "";
 }
 
-<h1>Persons Language</h1>
+<h1>Persons Languages</h1>
 
 <div class="form-group row">
 	<p>
-		<a asp-action="AddLanguage" class="btn btn-secondary btn-sm" role="button">Add language</a>
-		<a asp-action="EditLanguage" class="btn btn-secondary btn-sm" role="button">Edit person languages</a>
+		<a asp-action="AddNewLanguage" class="btn btn-secondary btn-sm" role="button">Add / Delete language</a>
 	</p>
 </div>
 
@@ -20,8 +19,8 @@
 <table class=" table table-striped">
 
 	<th>Name</th>
-	<th>Language(s)</th>
-	<th>Delete</th>
+	<th>Known Languages</th>
+	<th>Manage Person Languages</th>
 
 	@foreach (var person in Model)
 	{
@@ -34,7 +33,11 @@
 
 			}
 			<td>@languages</td>
-			<td><a class="btn btn-secondary btn-sm" asp-action="Delete" asp-route-personid="@person.PersonId">Edit</a></td>
+			<td>
+				<a class="btn btn-secondary btn-sm" asp-action="Delete" asp-route-personid="@person.PersonId">Delete</a>
+				<a class="btn btn-secondary btn-sm" asp-action="AddLanguageToPerson">Add</a>
+			</td>
+			
 		</tr>
 
 		languages = "";

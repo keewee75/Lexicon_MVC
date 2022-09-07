@@ -1,0 +1,40 @@
+﻿@*@model Language*@
+@model LanguageViewModel
+@{
+	ViewData["Title"] = "Add New Language";
+}
+
+<h1>Add new language</h1>
+
+<form asp-action="AddNewLanguage" method="post">
+
+	<div class="form-group">
+		<label>Insert new language</label>
+		<div class="col-sm-3">
+			<input asp-for="LanguageName" type="text" class="form-control" placeholder="Type in language name..." />
+		</div>
+	</div>
+
+	<p></p>
+
+	<input type="submit" value="Add new language" class="btn btn-secondary btn-sm" />
+
+</form>
+
+<p></p>
+
+<!-- List Languages -->
+<table class=" table table-striped">
+
+	<th>Current languages</th>
+	<th>Delete language</th>
+
+	@foreach (var language in Model.Languages)
+	{
+		<tr>
+			<td>@language.LanguageName</td>
+			<td><a class="btn btn-secondary btn-sm" asp-action="DeleteLanguage" asp-route-languageid="@language.LanguageId">Delete</a></td>
+		</tr>
+	}
+
+</table>
