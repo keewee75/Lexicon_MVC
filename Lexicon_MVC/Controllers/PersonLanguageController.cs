@@ -59,11 +59,36 @@ namespace Lexicon_MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult EditLanguage(int personId)
+        //public IActionResult EditLanguage()
+        //{
+        //    ViewBag.People = new SelectList(_dbContext.People, "PersonId", "Name");
+        //    List<Person> people = _dbContext.People.Include(p => p.Languages).ToList();
+
+        //    return View(people);
+        //}
+        //[HttpPost]
+        //public IActionResult EditLanguage(int personId)
+        //{
+        //    ViewBag.People = new SelectList(_dbContext.People, "PersonId", "Name");
+        //    List<Person> filteredPerson = _dbContext.People
+        //        .Where(x => x.PersonId == personId).Include(p=> p.Languages).ToList();
+
+        //    return View(filteredPerson);
+        //}
+
+        public IActionResult EditLanguage()
         {
             ViewBag.People = new SelectList(_dbContext.People, "PersonId", "Name");
-            var filteredPerson = _dbContext.People
-                .Where(x => x.PersonId == personId).ToList();
+            List<Language> language = _dbContext.Languages.Include(p => p.People).ToList();
+
+            return View(language);
+        }
+        [HttpPost]
+        public IActionResult EditLanguage(int languageId)
+        {
+            ViewBag.People = new SelectList(_dbContext.People, "PersonId", "Name");
+            List<Language> filteredPerson = _dbContext.Languages
+                .Where(x => x.LanguageId == languageId).Include(p => p.People).ToList();
 
             return View(filteredPerson);
         }
