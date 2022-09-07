@@ -3,15 +3,12 @@
 	ViewData["Title"] = "EditLanguage";
 }
 
-@*<h1>Delete Language</h1>*@
 
 <form asp-action="Delete" method="post">
 	<div class="form-group col-sm-3">
 		<h2>Delete language for: @Model.Name </h2>
-		<label>
-			Select language:
-		</label>
 		<select name="languageId" class="form-control">
+			<option value="" selected disabled>Select Language</option>
 			@foreach (var lang in Model.Languages)
 			{
 				<option value="@lang.LanguageId">@lang.LanguageName</option>

@@ -52,11 +52,16 @@ namespace Lexicon_MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult AddLanguageToPerson()
+        public IActionResult AddLanguageToPerson(int personId)
         {
             ViewBag.People = new SelectList(_dbContext.People, "PersonId", "Name");
             ViewBag.Languages = new SelectList(_dbContext.Languages, "LanguageId", "LanguageName");
-            return View();
+
+            Person p = _dbContext.People.FirstOrDefault(x => x.PersonId == personId);
+
+            return View(p);
+
+
         }
         [HttpPost]
         public IActionResult AddLanguageToPerson(int personId, int languageId)
@@ -76,7 +81,7 @@ namespace Lexicon_MVC.Controllers
                         {
                             if (lang.LanguageId == languageId)
                             {
-                                ViewBag.Exists = "Already exists";
+                                ViewBag.Exists = pers.Name + " already knows " + lang.LanguageName;
 
                                 return View("Index", people);
                             }
