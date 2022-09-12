@@ -1,10 +1,11 @@
 ﻿using Lexicon_MVC.Models;
 using Lexicon_MVC.ViewModels;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lexicon_MVC.Data
 {
-    public class ApplicationDbContext : DbContext // Database connection to manage EF. Inherit from DbContext that will handle queries.
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser> // Updated to inherit from IdentityDbContext. Needed for Identity
     {
         public ApplicationDbContext()
         {
