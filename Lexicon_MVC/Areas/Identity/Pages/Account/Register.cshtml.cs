@@ -98,7 +98,11 @@ namespace Lexicon_MVC.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
-        }
+
+			public string FirstName { get; set; }
+			public string Lastname { get; set; }
+            public DateTime BirthDate { get; set; }
+		}
 
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -113,7 +117,10 @@ namespace Lexicon_MVC.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = CreateUser();
+                var user = new ApplicationUser();
+                user.FirstName = Input.FirstName;
+                user.LastName = Input.Lastname;
+                user.BirthDate = Input.BirthDate;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

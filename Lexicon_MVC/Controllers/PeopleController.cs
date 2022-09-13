@@ -1,6 +1,7 @@
 ﻿using Lexicon_MVC.Data;
 using Lexicon_MVC.Models;
 using Lexicon_MVC.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ using System.Linq;
 
 namespace Lexicon_MVC.Controllers
 {
+    [Authorize]
     public class PeopleController : Controller
     {
 
