@@ -8,6 +8,30 @@
     var weekDay = DateTime.Now.DayOfWeek;
 }
 <h1>@welcomeMessage</h1>
-<p>Today is @weekDay</p>
+<h2>Today is @weekDay</h2>
 
 
+@if(!User.Identity.IsAuthenticated)
+{
+    <p>Welcome! Please login!</p>
+}
+
+@if(User.Identity.IsAuthenticated)
+{
+    if(User.IsInRole("User") && User.IsInRole("Admin"))
+    {
+        <p>Hello padawan and Admin Jedi!</p>
+    }
+    else if(User.IsInRole("Admin"))
+    {
+        <p>Hi there Admin Jedi!</p>
+    }
+    else if(User.IsInRole("User"))
+    {
+        <p>Hi there padawan!</p>
+    }
+    else
+    {
+        <p>Hi there! You are now logged in!</p>
+    }
+}

@@ -2,96 +2,103 @@
 
 <html lang="en" class="h-100">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>@ViewBag.Title</title>
-    
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>@ViewBag.Title</title>
+
 	<!-- Bootstrap core CSS and Custom styles-->
-    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="~/css/Style.css" />
-    <link rel="stylesheet" type="text/css" href="~/css/custom.css" />
-    
+	<link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="~/css/Style.css" />
+	<link rel="stylesheet" type="text/css" href="~/css/custom.css" />
+
 </head>
 
 <body class="d-flex flex-column h-100">
-    
-<header>
-  <!-- Fixed navbar -->
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <div class="container-fluid">
-      <img src="\img\keewee.png" alt="">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav me-auto mb-2 mb-md-0">
-          <li class="nav-item">
-            <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" asp-controller="Home" asp-action="AboutMe">About Me</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" asp-controller="Home" asp-action="Projects">Projects</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" asp-controller="Home" asp-action="Contact">Contact</a>
-          </li>
-          @*<li class="nav-item">
-            <a class="nav-link" asp-controller="Home" asp-action="GuessingGame">Guessing Game</a>
-          </li>*@
-          @*<li class="nav-item">
-            <a class="nav-link" asp-controller="Doctor" asp-action="Index">Fever Check</a>
-          </li>*@
-          <li class="nav-item">
-            <a class="nav-link" asp-controller="People" asp-action="Index">People</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" asp-controller="City" asp-action="Index">Cities</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" asp-controller="Country" asp-action="Index">Countries</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" asp-controller="PersonLanguage" asp-action="Index">Persons languages</a>
-          </li>
-           @*<li class="nav-item">
-            <a class="nav-link" asp-controller="Cities3" asp-action="Index">Scaffolded</a>
-          </li>*@
-          <li class="nav-item">
-            <partial name="_LoginPartial" />
-          </li>
-          @*<li class="nav-item">
-            <a class="nav-link" asp-controller="Ajax" asp-action="Index">Ajax</a>
-          </li>*@
-        </ul>
-        @*<form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>*@
-      </div>
-    </div>
-  </nav>
-</header>
 
-<!-- Begin page content -->
-<main class="flex-shrink-0">
-  <div class="container">
-      @RenderBody()
-  </div>
-</main>
+	<header>
+		<!-- Fixed navbar -->
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+			<div class="container-fluid">
+				<img src="\img\keewee.png" alt="">
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarCollapse">
+					<ul class="navbar-nav me-auto mb-2 mb-md-0">
+						<li class="nav-item">
+							<a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" asp-controller="Home" asp-action="AboutMe">About Me</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" asp-controller="Home" asp-action="Projects">Projects</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" asp-controller="Home" asp-action="Contact">Contact</a>
+						</li>
+						@*<li class="nav-item">
+						<a class="nav-link" asp-controller="Home" asp-action="GuessingGame">Guessing Game</a>
+						</li>*@
+						@*<li class="nav-item">
+						<a class="nav-link" asp-controller="Doctor" asp-action="Index">Fever Check</a>
+						</li>*@
+						<li class="nav-item">
+							<a class="nav-link" asp-controller="People" asp-action="Index">People</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" asp-controller="City" asp-action="Index">Cities</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" asp-controller="Country" asp-action="Index">Countries</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" asp-controller="PersonLanguage" asp-action="Index">Persons languages</a>
+						</li>
+						@if (User.IsInRole("Admin"))
+						{
+							<li class="nav-item">
+								<a class="nav-link" asp-controller="Role" asp-action="Index">Roles</a>
+							</li>
+						}
 
-<!-- Sticky footer -->
-<footer class="footer mt-auto py-3 bg-light">
-  <div class="container">
-    <span class="text-muted">&copy; Marko Kivi @DateTime.Now.ToString("yyyy-MM-dd")</span>
-  </div>
-</footer>
+						@*<li class="nav-item">
+						<a class="nav-link" asp-controller="Cities3" asp-action="Index">Scaffolded</a>
+						</li>*@
+						<li class="nav-item">
+							<partial name="_LoginPartial" />
+						</li>
+						@*<li class="nav-item">
+						<a class="nav-link" asp-controller="Ajax" asp-action="Index">Ajax</a>
+						</li>*@
+					</ul>
+					@*<form class="d-flex">
+					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success" type="submit">Search</button>
+					</form>*@
+				</div>
+			</div>
+		</nav>
+	</header>
 
-<script src="~/lib/jquery/jquery.min.js"></script>
-<script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js"></script>
-<script src="~/js/Ajax.js"></script>
-@await RenderSectionAsync("Scripts", required: false)
-     
- </body>
+	<!-- Begin page content -->
+	<main class="flex-shrink-0">
+		<div class="container">
+			@RenderBody()
+		</div>
+	</main>
+
+	<!-- Sticky footer -->
+	<footer class="footer mt-auto py-3 bg-light">
+		<div class="container">
+			<span class="text-muted">&copy; Marko Kivi @DateTime.Now.ToString("yyyy-MM-dd")</span>
+		</div>
+	</footer>
+
+	<script src="~/lib/jquery/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js"></script>
+	<script src="~/js/Ajax.js"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+
+</body>
 </html>

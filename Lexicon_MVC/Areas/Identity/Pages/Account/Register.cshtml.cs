@@ -101,7 +101,10 @@ namespace Lexicon_MVC.Areas.Identity.Pages.Account
 
 			public string FirstName { get; set; }
 			public string Lastname { get; set; }
-            public DateTime BirthDate { get; set; }
+
+			[DataType(DataType.Date)]
+			public DateTime BirthDate { get; set; }
+			//public DateOnly BirthDate { get; set; }
 		}
 
 
@@ -128,6 +131,7 @@ namespace Lexicon_MVC.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "User"); // All new accounts will get User role
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
