@@ -1,12 +1,14 @@
 ﻿using Lexicon_MVC.Data;
 using Lexicon_MVC.Models;
 using Lexicon_MVC.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lexicon_MVC.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CityController : Controller
     {
         public static CityViewModel cityViewModel = new CityViewModel();

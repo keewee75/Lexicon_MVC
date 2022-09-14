@@ -78,7 +78,8 @@ namespace Lexicon_MVC.Controllers
 
             return RedirectToAction("Index");
         }
-     
+
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
 
