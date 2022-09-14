@@ -5,6 +5,9 @@
 
 <h1>List of roles</h1>
 
+<a asp-action="Create" class="btn btn-primary">Create new role</a>
+<a asp-action="AddUserToRole" class="btn btn-success">Add user to role</a>
+
 <table class="table">
     <thead>
         <tr>
@@ -23,7 +26,10 @@
             <td style="width:500px">@role.Id</td>
             <td>@role.Name</td>
             <td>
-                <a asp-action="Delete" asp-route-id="@role.Id" class="btn btn-danger">Delete role</a>
+                @if(role.Name != "User" && role.Name != "Admin") // Ser till att User och Admin inte går att Deleta
+                {
+                    <a asp-action="Delete" asp-route-id="@role.Id" class="btn btn-danger">Delete role</a>
+                }
             </td>
         </tr>
     }

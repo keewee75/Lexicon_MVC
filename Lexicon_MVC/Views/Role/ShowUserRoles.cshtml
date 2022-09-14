@@ -1,0 +1,24 @@
+﻿@model UserRoleViewModel
+@{
+    ViewData["Title"] = "ShowUserRoles";
+}
+
+<h1>Show roles for @Model.UserName</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Role name</th>
+            <th></th>
+        </tr>
+    </thead>
+    @foreach(var role in Model.Roles)
+    {
+        <tr>
+            <td>@role</td>
+            <td>
+                <a asp-action="RemoveRoleFromUser" asp-route-rolename="@role" asp-route-userid="@Model.UserId" class="btn btn-danger">Remove role</a>
+            </td>
+        </tr>
+    }
+</table>
