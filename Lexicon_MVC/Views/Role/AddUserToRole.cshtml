@@ -6,13 +6,17 @@
 <h1>Add User To Role</h1>
 
 <form asp-action="AddUserToRole" method="post">
-    <div class="form-group">
+
+    <div class="form-group col-sm-3">
         <label>User:</label>
         <select name="userId" class="form-control" asp-items="ViewBag.Users"></select>
     </div>
-    <div class="form-group">
+    <div class="form-group col-sm-3">
         <label>Role:</label>
         <select name="roleName" class="form-control" asp-items="ViewBag.Roles"></select>
     </div>
-    <input type="submit" value="Add user to role" class="btn btn-primary" />
+
+    <p></p>
+
+    <input type="submit" value="Add user to role" class="btn btn-secondary btn-sm" />
 </form>

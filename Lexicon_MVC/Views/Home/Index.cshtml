@@ -20,15 +20,16 @@
 {
     if(User.IsInRole("User") && User.IsInRole("Admin"))
     {
-        <p>Hello padawan and Admin Jedi!</p>
+        <p></p>
+        <p>Hello! You have User and Admin roles!</p>
     }
     else if(User.IsInRole("Admin"))
     {
-        <p>Hi there Admin Jedi!</p>
+        <p>Hello, you have Admin roles!</p>
     }
     else if(User.IsInRole("User"))
     {
-        <p>Hi there padawan!</p>
+        <p>Hi there, you are just a user my dear padawan!</p>
     }
     else
     {

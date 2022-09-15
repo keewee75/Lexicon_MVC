@@ -36,8 +36,8 @@
 			}
 			<td>@languages</td>
 			<td>
-				<a class="btn btn-secondary btn-sm" asp-action="Delete" asp-route-personid="@person.PersonId">Delete</a>
 				<a class="btn btn-secondary btn-sm" asp-action="AddLanguageToPerson" asp-route-personid="@person.PersonId">Add</a>
+				<a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-personid="@person.PersonId">Delete</a>
 				@*<a class="btn btn-secondary btn-sm" asp-action="AddLanguageToPerson">Add</a>*@
 			</td>
 			
