@@ -6,6 +6,7 @@
 @{
     string welcomeMessage = "Welcome to my website";
     var weekDay = DateTime.Now.DayOfWeek;
+    var fullName = ViewData["fullname"];
 }
 <h1>@welcomeMessage</h1>
 <h2>Today is @weekDay</h2>
@@ -13,23 +14,24 @@
 
 @if(!User.Identity.IsAuthenticated)
 {
-    <p>Welcome! Please login!</p>
+    <p>Please login!</p>
 }
 
 @if(User.Identity.IsAuthenticated)
 {
+    
+    <h3>Hi @fullName</h3>
     if(User.IsInRole("User") && User.IsInRole("Admin"))
     {
-        <p></p>
-        <p>Hello! You have User and Admin roles!</p>
+        <p>You have User and Admin roles!</p>
     }
     else if(User.IsInRole("Admin"))
     {
-        <p>Hello, you have Admin roles!</p>
+        <p>You have Admin roles!</p>
     }
     else if(User.IsInRole("User"))
     {
-        <p>Hi there, you are just a user my dear padawan!</p>
+        <p>You are just a user my dear padawan!</p>
     }
     else
     {

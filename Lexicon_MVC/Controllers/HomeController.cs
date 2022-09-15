@@ -1,12 +1,28 @@
 ﻿using Lexicon_MVC.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lexicon_MVC.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        readonly RoleManager<IdentityRole> roleManager;
+        readonly UserManager<ApplicationUser> userManager;
+
+        public HomeController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
+		{
+			this.roleManager = roleManager;
+			this.userManager = userManager;
+		}
+
+		public IActionResult Index()
         {
+            if (!String.IsNullOrEmpty(User.Identity.Name))
+			{
+                var user = userManager.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+
+				ViewData["fullname"] = user.FirstName + " " + user.LastName;
+			}
             return View();
         }
         public IActionResult GuessingGame()
