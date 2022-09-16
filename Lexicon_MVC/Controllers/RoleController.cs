@@ -10,8 +10,8 @@ namespace Lexicon_MVC.Controllers
 	[Authorize(Roles = "Admin")]
 	public class RoleController : Controller
 	{
-		readonly RoleManager<IdentityRole> _roleManager;
-		readonly UserManager<ApplicationUser> _userManager;
+		readonly RoleManager<IdentityRole> _roleManager; // Observera att man inte behöver referera till dbContext (görs per automatik)
+		readonly UserManager<ApplicationUser> _userManager; // Observera att man inte behöver referera till dbContext (görs per automatik)
 
 		public RoleController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
 		{
