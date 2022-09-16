@@ -24,36 +24,38 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarCollapse">
 					<ul class="navbar-nav me-auto mb-2 mb-md-0">
-						<li class="nav-item">
-							<a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" asp-controller="Home" asp-action="AboutMe">About Me</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" asp-controller="Home" asp-action="Projects">Projects</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" asp-controller="Home" asp-action="Contact">Contact</a>
-						</li>
-						@*<li class="nav-item">
-						<a class="nav-link" asp-controller="Home" asp-action="GuessingGame">Guessing Game</a>
-						</li>*@
-						@*<li class="nav-item">
-						<a class="nav-link" asp-controller="Doctor" asp-action="Index">Fever Check</a>
-						</li>*@
-						<li class="nav-item">
-							<a class="nav-link" asp-controller="People" asp-action="Index">People</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" asp-controller="City" asp-action="Index">Cities</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" asp-controller="Country" asp-action="Index">Countries</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" asp-controller="PersonLanguage" asp-action="Index">Persons languages</a>
-						</li>
+
+						<!-- Restrict nonregistered users to view links-->
+						@if (User.IsInRole("User") || User.IsInRole("Admin"))
+						{
+							<li class="nav-item">
+								<a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" asp-controller="Home" asp-action="AboutMe">About Me</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" asp-controller="Home" asp-action="Projects">Projects</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" asp-controller="Home" asp-action="Contact">Contact</a>
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link" asp-controller="People" asp-action="Index">People</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" asp-controller="City" asp-action="Index">Cities</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" asp-controller="Country" asp-action="Index">Countries</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" asp-controller="PersonLanguage" asp-action="Index">Persons languages</a>
+							</li>
+						}
+
+						<!-- Only Admins kan access roles-->
 						@if (User.IsInRole("Admin"))
 						{
 							<li class="nav-item">
@@ -64,12 +66,18 @@
 							</li>
 						}
 
-						@*<li class="nav-item">
-						<a class="nav-link" asp-controller="Cities3" asp-action="Index">Scaffolded</a>
-						</li>*@
 						<li class="nav-item">
 							<partial name="_LoginPartial" />
 						</li>
+						@*<li class="nav-item">
+						<a class="nav-link" asp-controller="Home" asp-action="GuessingGame">Guessing Game</a>
+						</li>*@
+						@*<li class="nav-item">
+						<a class="nav-link" asp-controller="Doctor" asp-action="Index">Fever Check</a>
+						</li>*@
+						@*<li class="nav-item">
+						<a class="nav-link" asp-controller="Cities3" asp-action="Index">Scaffolded</a>
+						</li>*@
 						@*<li class="nav-item">
 						<a class="nav-link" asp-controller="Ajax" asp-action="Index">Ajax</a>
 						</li>*@

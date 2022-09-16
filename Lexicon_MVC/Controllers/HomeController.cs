@@ -1,9 +1,11 @@
 ﻿using Lexicon_MVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lexicon_MVC.Controllers
 {
+    [Authorize(Roles = "Admin,User")]
     public class HomeController : Controller
     {
         readonly RoleManager<IdentityRole> roleManager;
