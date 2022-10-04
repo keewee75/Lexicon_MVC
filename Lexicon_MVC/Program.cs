@@ -5,6 +5,16 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Enable CORS default policy
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        policy =>
+        {
+            policy.WithOrigins("*");
+        });
+});
+
 builder.Services.AddMvc();
 
 //Add DbContext and specify what Db to connect to in DefaultConnection in file appsettings.json
@@ -42,6 +52,9 @@ var app = builder.Build();
 app.UseSession();
 app.UseStaticFiles();
 app.UseRouting();
+
+// Enable CORS
+app.UseCors();
 
 //More functionality for Identity
 app.UseAuthentication();
