@@ -43,6 +43,21 @@ namespace Lexicon_MVC.Controllers
             return Ok(newPerson);
         }
 
+        [HttpDelete]
+        [Route("{id:int}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var userToDelete = new Person() { PersonId = id };
+            //var userToDelete = await _dbContext.People.FindAsync(id);
+            if (userToDelete == null)
+            {
+                return NotFound();
+            }
+            _dbContext.People.Remove(userToDelete);
+            await _dbContext.SaveChangesAsync();
+            return Ok();
+        }
+
         [HttpGet("getcountries")]
         [ProducesResponseType(200)]
         public async Task<IActionResult> GetCountries()
@@ -59,23 +74,6 @@ namespace Lexicon_MVC.Controllers
             var cities = await _dbContext.People.Include(p => p.City).ToListAsync();
             return Ok(cities);
         }
-
-        [HttpGet("getcities/{id}")]
-        [ProducesResponseType(200)]
-        public async Task<IActionResult> GetCitiesByCountry(int id)
-        {
-            var cities = await _dbContext.Cities.Where(c => c.CountryId == id).ToListAsync();
-            return Ok(cities);
-        }
-
-        //[HttpPost]
-        //public async Task<IActionResult> Post(Person newPerson)
-        //{
-        //    _dbContext.People.Add(newPerson);
-        //    await _dbContext.SaveChangesAsync();
-
-        //    return Ok(newPerson);
-        //}
 
     }
 }
