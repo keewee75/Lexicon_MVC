@@ -1,12 +1,14 @@
 ﻿using Lexicon_MVC.Data;
 using Lexicon_MVC.Models;
+using Lexicon_MVC.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Lexicon_MVC.Controllers
 {
-    [Route("[controller]")]
     [ApiController]
+    [Route("[controller]")]
     public class ReactApiController : ControllerBase
     {
         readonly ApplicationDbContext? _dbContext; // creates a readonly of DbContext
@@ -17,15 +19,63 @@ namespace Lexicon_MVC.Controllers
         }
 
    
-        [HttpGet("people/{id}")]
-        [ProducesResponseType(200)]
-        public ActionResult<Person> Get(int id)
+        [HttpGet]
+        public async Task<IActionResult> Get()
         {
-            Console.WriteLine("HHIIITTTTT"); Person myPerson = new Person() { Name = "Jörgen Jönsson", PhoneNumber = "031-330330", PersonId = id };
-
-            return myPerson;
+            var people = await _dbContext.People.Include(p => p.Languages).ToListAsync();
+            return Ok(people);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Post(CreatePersonViewModel p)
+        {
+            var newPerson = new Person()
+            {
+                Name = p.Name,
+                CityId = p.CityId,
+                PhoneNumber = p.PhoneNumber,
+            };
+
+
+            _dbContext.People.Add(newPerson);
+            await _dbContext.SaveChangesAsync();
+
+            return Ok(newPerson);
+        }
+
+        [HttpGet("getcountries")]
+        [ProducesResponseType(200)]
+        public async Task<IActionResult> GetCountries()
+        {
+            var countries = await _dbContext.Countries.Include(c => c.Cities).ToListAsync();
+            return Ok(countries);
+        }
+
+
+        [HttpGet("getcities")]
+        [ProducesResponseType(200)]
+        public async Task<IActionResult> GetCities()
+        {
+            var cities = await _dbContext.People.Include(p => p.City).ToListAsync();
+            return Ok(cities);
+        }
+
+        [HttpGet("getcities/{id}")]
+        [ProducesResponseType(200)]
+        public async Task<IActionResult> GetCitiesByCountry(int id)
+        {
+            var cities = await _dbContext.Cities.Where(c => c.CountryId == id).ToListAsync();
+            return Ok(cities);
+        }
+
+        //[HttpPost]
+        //public async Task<IActionResult> Post(Person newPerson)
+        //{
+        //    _dbContext.People.Add(newPerson);
+        //    await _dbContext.SaveChangesAsync();
+
+        //    return Ok(newPerson);
+        //}
 
     }
 }

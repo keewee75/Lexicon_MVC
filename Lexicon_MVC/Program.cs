@@ -2,17 +2,28 @@ using Lexicon_MVC.Data;
 using Lexicon_MVC.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Enable CORS default policy
+// Enable CORS default policy on all localhost ports
+//builder.Services.AddCors(options =>
+//{
+//    options.AddDefaultPolicy(policy =>
+//    {
+//    policy.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost");
+//    });
+//});
+
+builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(
-        policy =>
-        {
-            policy.WithOrigins("*");
-        });
+        policy => policy.WithOrigins("*")
+        .AllowAnyHeader()
+        .AllowAnyMethod());   
 });
 
 builder.Services.AddMvc();
